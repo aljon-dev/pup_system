@@ -16,3 +16,9 @@
   .hover\:bg-maroon:hover {
     background-color: #73353a;
   }
+
+  .backgroundImage {
+     background-image:url('/src/lib/assets/pup1.png')
+  }
+
+  

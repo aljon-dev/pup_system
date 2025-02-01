@@ -1,12 +1,21 @@
 <script lang="ts">
+
+    import logo from '../lib/assets/pup3.png';
     import { Button, Label,  Input} from 'flowbite-svelte';
 	import Layout from './+layout.svelte';
+	import { goto } from '$app/navigation';
+
+    
+
+
+
+
   </script>
   
-<div class="min-h-screen flex items-center justify-center bg-cream">
+<div class="min-h-screen flex items-center justify-center backgroundImage ">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
     <div class="flex justify-center mb-6">
-     <img src="" alt="logo" class="h-16">
+     <img src={logo} alt="logo" class="h-16">
     </div>
 
      <h2 class="text-2xl font-bold text-maroon mb-6 text-center">Login</h2>
@@ -21,7 +30,7 @@
             <Input  type="password" placeholder="Enter your Password" required class="w-full" />
         </div>
 
-        <Button type="submit" class="w-full bg-darkYellow hover:bg-maroon text-white">Login</Button>
+        <Button type="submit" class="w-full bg-darkYellow hover:bg-maroon text-white" onclick={()=> goto('/admin')}>Login</Button>
 
      </form>
 
