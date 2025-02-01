@@ -1,0 +1,18 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+.bg-cream {
+    background-color: #fff7d6;
+  }
+  
+  .text-maroon {
+    color: #73353a;
+  }
+  
+  .bg-darkYellow {
+    background-color: #e6b364;
+  }
+  
+  .hover\:bg-maroon:hover {
+    background-color: #73353a;
+  }
