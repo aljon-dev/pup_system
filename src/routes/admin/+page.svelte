@@ -30,6 +30,7 @@
 	import BarChart from './Components/BarChart.svelte';
 	import DonutChart from './Components/DonutChart.svelte';
 	import PieChart from './Components/PieChart.svelte';
+	import CreateExams from './DashboarComponents/CreateExams.svelte';
   
   
    let isOpen = $state(true);
@@ -110,42 +111,42 @@
 
           
           <!-- Dashboard -->
-          <SidebarItem label="Dashboard" class="text-white font-semibold hover:bg-white hover:text-black">
+          <SidebarItem label="Dashboard"  onclick={()=> Navigation(0)} class="text-white font-semibold hover:bg-white hover:text-black">
             <svelte:fragment slot="icon">
               <ChartPieOutline class="w-5 h-5" />
             </svelte:fragment>
           </SidebarItem>
   
           <!-- Create Exams -->
-          <SidebarItem label="Create Exams" class="text-white font-semibold hover:bg-white hover:text-black">
-            <svelte:fragment slot="icon">
-              <RectangleListOutline class="w-5 h-5" />
+          <SidebarItem  label="Create Exams" onclick={()=> Navigation(1)} class="text-white font-semibold hover:bg-white hover:text-black">
+            <svelte:fragment   slot="icon">
+              <RectangleListOutline  class="w-5 h-5"  />
             </svelte:fragment>
           </SidebarItem>
   
           <!-- Students -->
-          <SidebarItem label="Students" class="text-white font-semibold hover:bg-white hover:text-black">
+          <SidebarItem label="Students" onclick={()=> Navigation(2)} class="text-white font-semibold hover:bg-white hover:text-black">
             <svelte:fragment slot="icon">
               <UserCircleOutline class="w-5 h-5" />
             </svelte:fragment>
           </SidebarItem>
   
           <!-- Analytics -->
-          <SidebarItem label="Analytics" class="text-white font-semibold hover:bg-white hover:text-black">
+          <SidebarItem label="Analytics" onclick={()=> Navigation(3)} class="text-white font-semibold hover:bg-white hover:text-black">
             <svelte:fragment slot="icon">
               <FileChartBarOutline class="w-5 h-5" />
             </svelte:fragment>
           </SidebarItem>
   
           <!-- Test Bank -->
-          <SidebarItem label="Test Bank" class="text-white font-semibold hover:bg-white hover:text-black">
+          <SidebarItem label="Test Bank" onclick={()=> Navigation(4)} class="text-white font-semibold hover:bg-white hover:text-black">
             <svelte:fragment slot="icon">
               <ArchiveOutline class="w-5 h-5" />
             </svelte:fragment>
           </SidebarItem>
   
           <!-- Calendar -->
-          <SidebarItem label="Calendar" class="text-white font-semibold hover:bg-white hover:text-black">
+          <SidebarItem label="Calendar"  onclick={()=> Navigation(5)} class="text-white font-semibold hover:bg-white hover:text-black">
             <svelte:fragment slot="icon">
               <CalendarWeekOutline class="w-5 h-5" />
             </svelte:fragment>
@@ -250,14 +251,16 @@
           <h3 class="mb-4 text-xl font-bold">Item Analysis Table</h3>
           <!-- Add table here -->
         </div>
-
- 
-      
       </div>
-     
     </main>
- 
     </div>
+
     {/if}
+
+    {#if Navigator == NavigatorList[1]}
+        <CreateExams/>
+
+    {/if}
+
   </div>
  
