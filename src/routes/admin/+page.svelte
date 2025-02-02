@@ -91,20 +91,22 @@
    
     <!-- Sidebar -->
      {#if isOpen}
-    <Sidebar  class=" md:relative z-40 ">
+     
+    <Sidebar  class=" fixed md:relative z-40 ">
       
-      <SidebarWrapper class="bg-red-900 w-64 min-h-screen overflow-y-auto">
+      <SidebarWrapper class="  bg-red-900 w-64 h-full overflow-hidden ">
         <div class="md:hidden top-0 left-0 z-50 p-4">
         
         <CloseCircleOutline onclick={() => (isOpen = !isOpen)} />
       
 
         </div>
+        <div class="fixed">
         <div class="flex justify-center p-4">
           <img src={logo} alt="logo" class="h-20 w-auto">
         </div>
-        
-        <SidebarGroup>
+    
+        <SidebarGroup >
 
           
           <!-- Dashboard -->
@@ -158,9 +160,15 @@
             </svelte:fragment>
           </SidebarItem>
         </SidebarGroup>
+      </div>
       </SidebarWrapper>
+   
     </Sidebar>
+ 
+
     {/if}
+ 
+   
   
     {#if Navigator == NavigatorList[0]}
     <div>
