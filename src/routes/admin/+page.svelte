@@ -33,8 +33,20 @@
   
   
    let isOpen = $state(true);
-
    let isMobile = $state(false);
+   let Navigator = $state('Dashboard');
+   let navIndex = $state(0);
+
+   let NavigatorList = ([
+    'Dashboard',
+    'CreateExams',
+    'Students',
+    'Analytics',
+    'Test Bank',
+    'Calendar',
+   ])
+
+
 
    $effect(()=>{
 
@@ -54,6 +66,14 @@
 
    })
 
+   
+
+   function Navigation(navigation:number): void{
+
+     Navigator = NavigatorList[navigation]
+      
+   }
+
 
  
 
@@ -71,10 +91,10 @@
    
     <!-- Sidebar -->
      {#if isOpen}
-    <Sidebar  class="fixed md:relative z-40">
+    <Sidebar  class=" md:relative z-40 ">
       
       <SidebarWrapper class="bg-red-900 w-64 min-h-screen overflow-y-auto">
-        <div class="md:hidden  top-0 left-0 z-50 p-4">
+        <div class="md:hidden top-0 left-0 z-50 p-4">
         
         <CloseCircleOutline onclick={() => (isOpen = !isOpen)} />
       
@@ -142,14 +162,25 @@
     </Sidebar>
     {/if}
   
-    <!-- Main Content -->
-    <main class="flex-1 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
+    {#if Navigator == NavigatorList[0]}
+    <div>
+    <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
       <!-- To-do List Section -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+
+   
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 mb-4">
         <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
           <h3 class="mb-4 text-xl font-bold">To-do List</h3>
           <!-- Add todo list content here -->
         </div>
+    
+        
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+          <h3 class="mb-4 text-xl font-bold">To-do List</h3>
+          <!-- Add todo list content here -->
+        </div>
+      
   
         <!-- Score Analysis Section -->
         <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
@@ -207,11 +238,18 @@
           </Table>
         
         </div>
-     
         <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
           <h3 class="mb-4 text-xl font-bold">Item Analysis Table</h3>
           <!-- Add table here -->
         </div>
+
+ 
+      
       </div>
+     
     </main>
+ 
+    </div>
+    {/if}
   </div>
+ 
