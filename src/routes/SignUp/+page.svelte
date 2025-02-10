@@ -2,7 +2,8 @@
     import { Button, Label, Input, Fileupload, Helper } from 'flowbite-svelte';
     import bground from '$lib/assets/pup1.png';
     
-    let currentStep = 1;
+    let currentStep = $state(1);
+
     let formData = {
         firstName: '',
         lastName: '',
@@ -45,7 +46,7 @@
 
     function nextStep() {
         if (validateCurrentStep()) {
-            currentStep++;
+            currentStep + 1;
         }
     }
     
@@ -143,7 +144,7 @@
                         <Helper color="red">{errors.lastName}</Helper>
                     {/if}
                 </div>
-                <Button type="button" class="w-full  bg-red-700" on:click={nextStep}>Next</Button>
+                <Button type="button" class="w-full  bg-red-700" onclick={()=> nextStep}>Next</Button>
             </div>
         {/if}
 
@@ -242,8 +243,8 @@
                     {/if}
                 </div>
                 <div class="flex gap-4">
-                    <Button type="button" color="alternative" class="w-1/2" on:click={previousStep}>Back</Button>
-                    <Button type="button" class="w-1/2 bg-[#800000] hover:bg-[#600000]" on:click={nextStep}>Next</Button>
+                    <Button type="button" color="alternative" class="w-1/2" onclick={previousStep}>Back</Button>
+                    <Button type="button" class="w-1/2 bg-[#800000] hover:bg-[#600000]" onclick={nextStep}>Next</Button>
                 </div>
             </div>
         {/if}
