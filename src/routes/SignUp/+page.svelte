@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button, Label, Input, Fileupload, Helper } from 'flowbite-svelte';
 	import bground from '$lib/assets/pup1.png';
+    import logopup  from '$lib/assets/pup-logo.png'
 
 	let currentStep = $state(1);
 
@@ -83,17 +84,16 @@
 	}
 </script>
 
-<div
-	style="background-image: url('{bground}'); background-size: cover; background-position: center;"
-	class="relative"
->
+<div class="relative-back">
 	<form
+        style="background-image: url('{bground}'); background-size: cover; background-position: center;"
 		class=" flex min-h-screen items-center justify-center bg-gradient-to-b from-yellow-100 to-red-200 px-4 py-12 sm:px-6 lg:px-8"
 		onsubmit={handleSubmit}
+        
 	>
 		<div class="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-lg">
 			<div class="flex justify-center">
-				<img src="../lib/assets/pup-logo.png" alt="PUP Logo" class="h-24 w-auto" />
+				<img src="{logopup}" alt="PUP Logo" class="h-24 w-auto" />
 			</div>
 
 			<div class="mb-8 text-center">
