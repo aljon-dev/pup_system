@@ -87,8 +87,6 @@
         method="post"
         action="?/userSignUp"
         enctype="multipart/form-data"
-
-
 	>
 		<div class="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-lg">
 			<div class="flex justify-center">
@@ -103,9 +101,9 @@
 			</div>
 
 			
-				<div class="space-y-6">
-					<div>
-						<Label for="firstName" class="mb-2 font-semibold text-gray-900">First Name</Label>
+				<div class:hidden={currentStep !== 1} class="space-y-6">
+					<div >
+						<Label for="firstName" class=" mb-2 font-semibold text-gray-900 }">First Name</Label>
 						<Input
 							id="firstName"
 							name="firstName"
@@ -130,7 +128,7 @@
 					<Button type="button" class="w-full  bg-red-700" on:click={nextStep}>Next</Button>
 				</div>
 			
-				<div class="space-y-6">
+				<div class:hidden={currentStep !== 2} class="space-y-6">
 					<div>
 						<Label for="studentNumber" class="mb-2 font-semibold text-gray-900"
 							>Student Number</Label
@@ -155,7 +153,7 @@
 					</div>
 				</div>
 			
-				<div class="space-y-6">
+				<div class:hidden={currentStep !== 3} class="space-y-6">
 					<div>
 						<Label for="email" class="mb-2 font-semibold text-gray-900">PUP Email Address</Label>
 						<Input
@@ -203,7 +201,7 @@
 					</div>
 				</div>
 			
-				<div class="space-y-6">
+				<div class:hidden={currentStep !== 4} class="space-y-6">
 					<div>
 						<Label for="documents" class="mb-2 font-semibold text-gray-900"
 							>Upload Required Documents</Label
