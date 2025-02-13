@@ -92,6 +92,18 @@
 			<Button type="submit" class="bg-darkYellow hover:bg-maroon w-full text-white">
 				{loginLoader ? 'Loading...' : 'Login'}
 			</Button>
+
 		</form>
+		<div class="flex flex-row justify-center mt-5">
+
+		
+		 <p class="text-red-500 font-semibold">
+			<button
+			onclick={()=> goto('/SignUp')}
+			 class="hover:text-red-900">No Account Yet? Register Here 
+			 </button>  
+			 </p>
+		</div>
+
 	</div>
 </div>
