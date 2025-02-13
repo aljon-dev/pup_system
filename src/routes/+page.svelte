@@ -11,12 +11,17 @@
 	  Img
 	} from 'flowbite-svelte';
 
-  import campus1 from '$lib/assets/pup-campus1.jpg';
+  import campus1 from '../lib/assets/pup-campus1.jpg';
   import campus2 from '$lib/assets/pup-campus2.jpg';
   import campus3 from '$lib/assets/pup-campus3.jpg';
   import campus4 from '$lib/assets/pup-campus4.jpg';
+  import logo from '$lib/assets/pup3.png';
+  import baybayin from '$lib/assets/baybayin-text.png';
+  import guideCover  from '$lib/assets/pup5.png';
   
 	import { fade, fly, scale } from 'svelte/transition';
+	import { assets } from '$app/paths';
+	import { goto } from '$app/navigation';
 
 
     const backgroundImages = [campus1,campus2,campus3,campus4];
@@ -101,9 +106,7 @@
 			  in:fly={{ x: -50, duration: 1000, delay: 300 }}
 			>
 			  <div class="flex items-center justify-center md:justify-start space-x-2 mb-8">
-				<img 
-				  src="../src/assets/pup-logo3.png" 
-				  alt="PUP Logo" 
+				<img src={logo} alt="PUP Logo"
 				  class="h-20 transform transition-transform duration-300 hover:scale-110"
 				>
 				<div class="h-16 w-px bg-gold-400"></div>
@@ -229,10 +232,10 @@
 			<span class="w-8 h-px bg-gold-400"></span>
 			<div class="relative group">
 				<img 
-              src="../src/assets/baybayin-text.png" 
-              alt="Tanglaw ng Bayan in Baybayin" 
-              class="h-14 transform transition-all duration-300 group-hover:scale-110"
-            />
+			  src={baybayin}
+			  alt="Tanglaw ng Bayan in Baybayin" 
+			  class="h-14 transform transition-all duration-300 group-hover:scale-110"
+			/>
 			</div>
 			<span class="w-8 h-px bg-gold-400"></span>
 			</div>
@@ -251,7 +254,7 @@
 		  <div 
 			class="bg-gold-400/10 p-1 rounded-full w-24 h-24 mx-auto mb-8 flex items-center justify-center transform transition-all duration-300 hover:scale-110"
 		  >
-			<img src="../src/assets/pup-logo3.png" alt="PUP Guide Cover" class="rounded-full">
+			<img src={guideCover} alt="PUP Guide Cover" class="rounded-full">
 		  </div>
 		  <h2 class="text-4xl font-bold mb-4">PUP Portal Access</h2>
       <p class="mb-8 text-gray-300">
@@ -259,7 +262,7 @@
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
 		<Button 
-		href="https://portalsample.pup.edu.ph/student" 
+	    onclick={() => goto('/studentLogin')}
 		class="bg-red-800 hover:bg-red-900 hover:text-yellow-500 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
 	  >
 		<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -268,9 +271,9 @@
 		Student Portal
 	  </Button>
 	  <Button 
-		href="https://portalsample.pup.edu.ph/admin" 
+	  	onclick={()=> goto('/adminLogin')}
 		class="bg-gold-600 hover:bg-gold-700 hover:text-yellow-500 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
-	  >
+	    >
 		<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
 		  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
 		</svg>

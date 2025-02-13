@@ -20,5 +20,10 @@
   .backgroundImage {
      background-image:url('/src/lib/assets/pup1.png')
   }
+  .backgroundLoginImage {
+
+      background-image: url('/src/lib/assets/pup-campus2.jpg');
+
+  }
 
   
