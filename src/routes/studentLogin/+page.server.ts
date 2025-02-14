@@ -11,7 +11,6 @@ export const actions: Actions = {
         const useremail = formData.get('') as string
         const password = formData.get('') as string
 
-
         const {data,error} = await supabase.auth.signInWithPassword({
             email:useremail,
             password:password
@@ -27,7 +26,9 @@ export const actions: Actions = {
             }
         }
 
-        throw redirect(303,'/studentPortal')
+        if(data){
+            throw redirect(303,'/studentPortal')
+        }
         
     
     
