@@ -31,12 +31,18 @@
 	import DonutChart from './Components/DonutChart.svelte';
 	import PieChart from './Components/PieChart.svelte';
 	import CreateExams from './DashboarComponents/CreateExams.svelte';
+	import AddTodo from './Modals/AddTodo.svelte';
   
   
    let isOpen = $state(true);
    let isMobile = $state(false);
    let Navigator = $state('Dashboard');
    let navIndex = $state(0);
+   let todoModal = $state(false);
+
+
+
+
 
    let NavigatorList = ([
     'Dashboard',
@@ -63,11 +69,8 @@
       mediaQuery.addEventListener('change',handleSize)
       return () => mediaQuery.removeEventListener('change',handleSize)
   }
-    
-
+  
    })
-
-   
 
    function Navigation(navigation:number): void{
 
@@ -169,25 +172,24 @@
 
     {/if}
  
-   
   
     {#if Navigator == NavigatorList[0]}
+
     <div>
     <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
       <!-- To-do List Section -->
-
-   
         
-       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         
         <div class="flex flex-row p-4 bg-white rounded-lg shadow dark:bg-gray-800">
           <h3 class="mb-4 text-xl font-bold">To-do List</h3>
-          <div >
-            <Button  class=" float-right ml-36"> Add  </Button>
+          <div>
+            <Button  class="float-right ml-36" onclick={()=> todoModal = true }> Add </Button>
           </div>
          
         </div>
- 
+
+
       
   
         <!-- Score Analysis Section -->
@@ -260,6 +262,8 @@
         <CreateExams/>
 
     {/if}
+
+    <AddTodo  defaultModal = {todoModal}/>
 
   </div>
  
