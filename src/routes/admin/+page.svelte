@@ -177,18 +177,17 @@
       <!-- To-do List Section -->
 
    
-       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 mb-4">
-        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h3 class="mb-4 text-xl font-bold">To-do List</h3>
-          <!-- Add todo list content here -->
-        </div>
-    
         
        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+        
+        <div class="flex flex-row p-4 bg-white rounded-lg shadow dark:bg-gray-800">
           <h3 class="mb-4 text-xl font-bold">To-do List</h3>
-          <!-- Add todo list content here -->
+          <div >
+            <Button  class=" float-right ml-36"> Add  </Button>
+          </div>
+         
         </div>
+ 
       
   
         <!-- Score Analysis Section -->
