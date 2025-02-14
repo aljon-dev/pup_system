@@ -72,7 +72,7 @@
 		</div>
 
 		<h2 class="text-maroon mb-6 text-center text-2xl font-bold">User Login</h2>
-		<form class="space-y-6" method="post" action="?/loginAdminUser" use:enhance={loginStatus}>
+		<form class="space-y-6" method="post" action="?/loginUser" use:enhance={loginStatus}>
 			<div>
 				<Label for="email" class="text-maroon mb-2 block text-sm font-medium">Email</Label>
 				<Input type="email" name="email" placeholder="Enter your email" required class="w-full" />

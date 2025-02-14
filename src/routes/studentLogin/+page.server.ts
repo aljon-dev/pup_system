@@ -8,8 +8,8 @@ export const actions: Actions = {
     loginUser: async ({locals:{supabase},request}) =>{
 
         const formData = await request.formData();
-        const useremail = formData.get('') as string
-        const password = formData.get('') as string
+        const useremail = formData.get('email') as string
+        const password = formData.get('password') as string
 
         const {data,error} = await supabase.auth.signInWithPassword({
             email:useremail,
@@ -30,13 +30,6 @@ export const actions: Actions = {
             throw redirect(303,'/studentPortal')
         }
         
-    
-    
-       
-
-
-
-         
 
 
     }
