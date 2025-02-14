@@ -50,9 +50,7 @@
 	  }
 	};
   
-	// Background images for carousel
-
-	// Carousel interval
+	
         $effect(()=>{
             const interval = setInterval(()=>{
                 currentBgIndex = (currentBgIndex + 1) % backgroundImages.length
