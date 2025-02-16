@@ -22,6 +22,8 @@
 	import { fade, fly, scale } from 'svelte/transition';
 	import { assets } from '$app/paths';
 	import { goto } from '$app/navigation';
+	import type { SubmitFunction } from '@sveltejs/kit';
+	import { enhance } from '$app/forms';
 
 
     const backgroundImages = [campus1,campus2,campus3,campus4];
@@ -29,26 +31,49 @@
 
   
 	// Form data with proper bindings
-	let firstName: string = '';
-	let lastName: string = '';
-	let email: string = '';
-	let isSubmitting = false;
+	let loginState = $state('');
+	let loginLoader = $state(false);
+	let statusState = $state<Number>();
   
-	const handleSubmit = async (e: Event) => {
-	  e.preventDefault();
-	  isSubmitting = true;
-	  
-	  try {
-		await new Promise(resolve => setTimeout(resolve, 1000));
-		console.log({ firstName, lastName, email });
-		// Reset form
-		firstName = '';
-		lastName = '';
-		email = '';
-	  } finally {
-		isSubmitting = false;
+	const  Login : SubmitFunction = () =>{
+
+		loginLoader = false;
+
+      return async ({result, update}) => {
+		const {status,data} = result as {status:number,type:string,data:{msg:string,status:number}}
+
+		switch (status) {
+				case 200:
+					loginLoader = false;
+					loginState = data.msg;
+					statusState = data.status;
+
+					break;
+
+				case 400:
+					loginLoader = false;
+					loginState = 'Invalid user please try again';
+					statusState = data.status;
+					break;
+
+				case 500:
+					loginLoader = false;
+					loginState = 'Invalid user please try again';
+					statusState = data.status;
+
+					break;
+
+				default:
+					loginLoader = false;
+					break;
+			}
+
+			await update();
+
+
 	  }
-	};
+	}
+	
   
 	
         $effect(()=>{
@@ -131,40 +156,33 @@
 			  in:fly={{ x: 50, duration: 1000, delay: 300 }}
 			>
 			  <Card class="p-8 shadow-xl border-t-4 border-gold-400 bg-white transform transition-all duration-300 hover:shadow-2xl">
-				<h3 class="text-red-800 font-bold text-xl mb-6">PUPCET Application Form</h3>
-				<form on:submit={handleSubmit} class="space-y-4">
-				  <div class="grid grid-cols-2 gap-4">
-					<Input
-					  type="text"
-					  placeholder="First Name"
-					  required
-					  class="bg-white border-red-200 focus:border-red-800 focus:ring-red-800 transition-all duration-300"
-					  bind:value={firstName}
-					/>
-					<Input
-					  type="text"
-					  placeholder="Last Name"
-					  required
-					  class="bg-white border-red-200 focus:border-red-800 focus:ring-red-800 transition-all duration-300"
-					  bind:value={lastName}
-					/>
-				  </div>
+				<h3 class="text-red-800 font-bold text-xl mb-6">PUPCET LOGIN FORM</h3>
+				<form method="post" action="?/loginUser"  use:enhance={Login} class="space-y-4">
+				
 				  <Input
 					type="email"
 					placeholder="Email Address"
 					required
 					class="bg-white border-red-200 focus:border-red-800 focus:ring-red-800 transition-all duration-300"
-					bind:value={email}
+					name="email"
+				  />
+
+				  <Input
+					type="password"
+					placeholder="Your Password"
+					required
+					class="bg-white border-red-200 focus:border-red-800 focus:ring-red-800 transition-all duration-300"
+					name="password"
 				  />
 				  <Button 
 					type="submit" 
-					disabled={isSubmitting}
+					disabled={loginLoader}
 					class="w-full bg-red-800 text-white border border-gold-400 transition-all duration-300 transform hover:bg-gold-400 hover:text-red-800 hover:scale-105 disabled:opacity-50"
 				  >
-					{isSubmitting ? 'Submitting...' : 'Apply for PUPCET'}
+					{loginLoader ? 'Submitting...' : 'Sign In'}
 				  </Button>
 				  <p class="text-xs text-gray-500 text-center">
-					By submitting this form, you'll receive important updates about your PUPCET application
+					Thru Login you can see your account status schedules of exams etc.
 				  </p>
 				</form>
 			  </Card>
@@ -215,8 +233,7 @@
 	</section>
   
 	<section 
-	class="py-16 bg-red-800 text-white"
-	in:fade={{ duration: 1000 }}
+	class="py-16 bg-red-800 text-white" in:fade={{ duration: 1000 }}
 	>
 	<div class="container mx-auto px-6 lg:px-8">
 		<div class="max-w-3xl mx-auto text-center">
@@ -244,8 +261,7 @@
   
 	
 	<section 
-	  class="py-20 bg-gray-900 text-white"
-	  in:fade={{ duration: 1000 }}
+	  class="py-20 bg-gray-900 text-white" in:fade={{ duration: 1000 }}
 	>
 	  <div class="container mx-auto px-6 lg:px-8 text-center">
 		<div class="max-w-2xl mx-auto">
