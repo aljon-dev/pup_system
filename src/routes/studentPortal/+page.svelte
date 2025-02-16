@@ -5,6 +5,7 @@ import { browser } from '$app/environment';
 import { Sidebar,SidebarGroup,SidebarItem,SidebarWrapper, NavHamburger} from 'flowbite-svelte'
 import { CloseCircleOutline, OpenDoorOutline } from 'flowbite-svelte-icons';
 import logo from '$lib/assets/pup3.png';
+	import RegistrationExam from './Component/RegistrationExam.svelte';
 
 
 let isOpen = $state(true);
@@ -15,7 +16,9 @@ let Navigator = $state('Announcement');
 let NavigatorList = ([
     'Announcement',
     'Schedule',
-    'Exam'
+    'Exam',
+    'Registration',
+    'Status',
 ])
 
 $effect(() => {
@@ -92,6 +95,27 @@ $effect(() => {
 
                 </SidebarItem>
 
+
+                <SidebarItem label="Exam Registration" onclick={()=> Navigation(3)} class="text-white font-semibold hover:bg-white hover:text-black">
+                    <svelte:fragment slot="icon">
+                        
+
+                    </svelte:fragment>
+
+
+                </SidebarItem>
+
+                <SidebarItem label="Exam Registration Status" onclick={()=> Navigation(4)} class="text-white font-semibold hover:bg-white hover:text-black">
+                    <svelte:fragment slot="icon">
+                        
+
+                    </svelte:fragment>
+
+
+                </SidebarItem>
+
+
+
             </SidebarGroup>
 
             <SidebarGroup border>
@@ -109,10 +133,51 @@ $effect(() => {
     {#if Navigator == NavigatorList[0]}
   
     <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
-    <p>asdasdfdggggggggggggggggggggggggggggggggggggggfdsfsdfsdf</p>
+    <p>Announcement</p>
     </main>
    
     {/if}
+
+
+    {#if Navigator == NavigatorList[1]}
+  
+    <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
+    <p>Schedule</p>
+    </main>
+   
+    {/if}
+
+    {#if Navigator == NavigatorList[2]}
+  
+    <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
+    <p>EXAM</p>
+    </main>
+   
+    {/if}
+
+    {#if Navigator == NavigatorList[3]}
+  
+    <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
+    
+     <RegistrationExam/>
+
+
+
+
+    </main>
+   
+    {/if}
+
+
+    {#if Navigator == NavigatorList[4]}
+  
+    <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
+    <p>EXAM REGISTRATION STATUS</p>
+    </main>
+   
+    {/if}
+
+
 
 
 </div>

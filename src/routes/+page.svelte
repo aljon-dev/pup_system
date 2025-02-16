@@ -275,15 +275,7 @@
         Access your personalized PUP dashboard to manage your academic journey or administrative tasks.
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
-		<Button 
-	    onclick={() => goto('/studentLogin')}
-		class="bg-red-800 hover:bg-red-900 hover:text-yellow-500 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
-	  >
-		<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-		  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-		</svg>
-		Student Portal
-	  </Button>
+	
 	  <Button 
 	  	onclick={()=> goto('/adminLogin')}
 		class="bg-gold-600 hover:bg-gold-700 hover:text-yellow-500 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
