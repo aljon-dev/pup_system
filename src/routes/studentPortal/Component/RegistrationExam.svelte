@@ -180,24 +180,7 @@
 		</div>
 
 		<div class:hidden={currentStep !== 3} class="space-y-6">
-			<div>
-				<Label for="studentNumber" class="mb-2 font-semibold text-gray-900">Student Number</Label>
-				<Input
-					id="studentNumber"
-					name="studentNumber"
-					type="text"
-					placeholder="2020-00000-TG-0"
-					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
-				/>
-			</div>
-			<div class="flex gap-4">
-				<Button type="button" color="alternative" class="w-1/2" on:click={previousStep}>Back</Button>
-				<Button type="button" class="w-1/2 bg-[#800000] hover:bg-[#600000]" on:click={nextStep}>Next</Button>
-			</div>
-		</div>
-
-		<div class:hidden={currentStep !== 4} class="space-y-6">
-			<div>
+            <div>
 				<Label for="email" class="mb-2 font-semibold text-gray-900">PUP Email Address</Label>
 				<Input
 					id="email"
@@ -208,18 +191,18 @@
 				/>
 			</div>
 			<div>
-				<Label for="password" class="mb-2 font-semibold text-gray-900">Password</Label>
+				<Label for="Contact Number" class="mb-2 font-semibold text-gray-900">Contact Number</Label>
 				<Input
 					id="password"
-					name="password"
-					type="password"
+					name="contact"
+					type="number"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 				/>
-				<Label for="confirmPassword" class="mb-2 font-semibold text-gray-900">Confirm Password</Label>
+				<Label for="confirmPassword" class="mb-2 font-semibold text-gray-900">Address</Label>
 				<Input
-					id="confirmPassword"
-					name="confirmPassword"
-					type="password"
+                
+					name="address"
+					type="text"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 				/>
 			</div>
@@ -229,12 +212,65 @@
 			</div>
 		</div>
 
+		<div class:hidden={currentStep !== 4} class="space-y-6">
+			<div>
+				<Label for="Years of Residency" class="mb-2 font-semibold text-gray-900">Years of Residency</Label>
+				<Input
+					id="email"
+					name="residency"
+					type="number"
+					placeholder="Years of Residency"
+					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
+				/>
+			</div>
+
+            <div>
+				<Label for="Previous School" class="mb-2 font-semibold text-gray-900">Name of Previous School</Label>
+				<Select bind:value={selectedGender} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
+                    {#each gender as  genderType}
+                    <option>{genderType}</option>
+                    {/each}
+                </Select>
+			</div>
+
+            <div>
+				<Label for="Previous Program," class="mb-2 font-semibold text-gray-900">Name of Previous Program</Label>
+				<Select bind:value={selectedGender} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
+                    {#each gender as  genderType}
+                    <option>{genderType}</option>
+                    {/each}
+                </Select>
+			</div>
+
+            <div>
+				<Label for="Applying To," class="mb-2 font-semibold text-gray-900">Name of Program Applying To</Label>
+				<Select bind:value={selectedGender} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
+                    {#each gender as  genderType}
+                    <option>{genderType}</option>
+                    {/each}
+                </Select>
+			</div>
+			
+			<div class="flex gap-4">
+				<Button type="button" color="alternative" class="w-1/2" onclick={previousStep}>Back</Button>
+				<Button type="button" class="w-1/2 bg-[#800000] hover:bg-[#600000]" on:click={nextStep}>Next</Button>
+			</div>
+		</div>
+
 		<div class:hidden={currentStep !== 5} class="space-y-6">
 			<div>
 				<Label for="documents" class="mb-2 font-semibold text-gray-900">Upload Required Documents</Label>
-				<p class="mb-2 text-sm text-gray-700">
-					Please upload your school ID and registration form
-				</p>
+				
+				<Fileupload
+					id="documents"
+					name="documents"
+					type="file"
+					accept=".pdf,.png,.jpg,.jpeg"
+				/>
+
+
+                <Label for="documents" class="mb-2 font-semibold text-gray-900">Upload School Id</Label>
+				
 				<Fileupload
 					id="documents"
 					name="documents"
