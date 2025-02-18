@@ -83,6 +83,7 @@ const Univerisities = [
 	let selecteduniversities = $state('');
 	let selectedPreviousProgram = $state('');
 	let selectedDesiredProgram = $state('');
+	let midname = $state('');
 
 
 
@@ -172,7 +173,7 @@ const Univerisities = [
 	class="flex min-h-screen items-center justify-center px-8 sm:px-6 lg:px-8"
 	use:enhance={SignUpStatus}
     method="post"
-    action="?/"
+    action="?/RegisterExam"
     enctype="multipart/form-data"
 >
 	<div class="w-full max-w-2xl space-y-10 rounded-lg bg-white p-8 shadow-lg">
@@ -194,6 +195,9 @@ const Univerisities = [
                     {#each studentTypes as  types}
                     <option>{types}</option>
                     {/each}
+				
+					<input type="hidden" value={selectedTypes} name="selectedTypes"> 
+
                 </Select>
 			</div>
 			
@@ -211,6 +215,7 @@ const Univerisities = [
 					bind:value={firstName}
 					type="text"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
+					required
 				/>
 			</div>
 			<div>
@@ -221,6 +226,7 @@ const Univerisities = [
 					bind:value={lastName}
 					type="text"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
+					required
 				/>
 			</div>
             
@@ -228,20 +234,17 @@ const Univerisities = [
 				<Label for="Middle Name" class="mb-2 font-semibold text-gray-900">Middle Name (Optional)</Label>
 				<Input
 					name="middleName"
+					bind:value={midname}
 					type="text"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
+					required
 				/>
 			</div>
 
+
+
                 
-            <div>
-				<Label for="Middle Name" class="mb-2 font-semibold text-gray-900">Middle Name (Optional)</Label>
-				<Input
-					name="middleName"
-					type="date"
-					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
-				/>
-			</div>
+            
 
             <div>
 				<Label for="firstName" class="mb-2 font-semibold text-gray-900">Gender</Label>
@@ -250,6 +253,7 @@ const Univerisities = [
                     <option>{genderType}</option>
                     {/each}
                 </Select>
+				<input type="hidden" name="gender" value={selectedGender}> 
 			</div>
 			
 
@@ -268,25 +272,27 @@ const Univerisities = [
 					id="email"
 					name="email"
 					type="email"
-					
 					placeholder="student@pup.edu.ph"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
+					required
 				/>
 			</div>
 			<div>
 				<Label for="Contact Number" class="mb-2 font-semibold text-gray-900">Contact Number</Label>
 				<Input
-					id="password"
+					
 					name="contact"
 					type="number"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
+					required
 				/>
-				<Label for="confirmPassword" class="mb-2 font-semibold text-gray-900">Address</Label>
+				<Label for="Address" class="mb-2 font-semibold text-gray-900">Address</Label>
 				<Input
                 
 					name="address"
 					type="text"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
+					required
 				/>
 			</div>
 			<div class="flex gap-4">
@@ -313,7 +319,11 @@ const Univerisities = [
                     {#each Univerisities as  univerisity}
                     <option>{univerisity}</option>
                     {/each}
+
+					
                 </Select>
+
+				<input type="hidden" name="univerisities" value={selecteduniversities}> 
 			</div>
 
             <div>
@@ -323,15 +333,19 @@ const Univerisities = [
                     <option>{programs}</option>
                     {/each}
                 </Select>
+
+				<input type="hidden" name="previousprogram" value={selectedPreviousProgram}> 
 			</div>
 
             <div>
 				<Label for="Applying To," class="mb-2 font-semibold text-gray-900">Name of Program Applying To</Label>
-				<Select bind:value={selectedDesiredProgram} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
+				<Select bind:value={selectedDesiredProgram} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]" >
                     {#each desiredProgram as  desireprogram}
                     <option>{desireprogram}</option>
                     {/each}
                 </Select>
+
+				<input type="hidden" name="desiredprogram" value={selectedDesiredProgram}> 
 			</div>
 			
 			<div class="flex gap-4">
@@ -349,6 +363,7 @@ const Univerisities = [
 					name="documents"
 					type="file"
 					accept=".pdf,.png,.jpg,.jpeg"
+					required
 				/>
 
 
@@ -356,9 +371,10 @@ const Univerisities = [
 				
 				<Fileupload
 					id="documents"
-					name="documents"
+					name="idpic"
 					type="file"
 					accept=".pdf,.png,.jpg,.jpeg"
+					required
 				/>
 			</div>
 			<div class="flex gap-4">
