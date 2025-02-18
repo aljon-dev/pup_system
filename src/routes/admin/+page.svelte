@@ -32,6 +32,7 @@
 	import PieChart from './Components/PieChart.svelte';
 	import CreateExams from './DashboarComponents/CreateExams.svelte';
 	import AddTodo from './Modals/AddTodo.svelte';
+	import StudentList from './DashboarComponents/StudentList.svelte';
   
   
    let isOpen = $state(true);
@@ -210,19 +211,11 @@
    
         </div>
 
-
-      
-  
         <!-- Score Analysis Section -->
-     
-          <BarChart/>
-     
-  
+        <BarChart/>
         <!-- Student Demographics Section -->
-        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h3 class="mb-4 text-xl font-bold">Student Demographics</h3>
-           <PieChart/>
-        </div>
+        <PieChart/>
+       
       </div>
   
       <!-- Exam Statistics Section -->
@@ -280,6 +273,15 @@
 
     {#if Navigator == NavigatorList[1]}
         <CreateExams/>
+
+    {/if}
+
+
+    {#if Navigator == NavigatorList[2]}
+
+    <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
+    <StudentList {data}/>
+    </main>
 
     {/if}
 

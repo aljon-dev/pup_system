@@ -11,8 +11,18 @@ export const load: PageServerLoad = async ({locals:{supabase}}) => {
     }
 
 
+    const{data:students,error:errorstudent } = await supabase.from('students').select("*")
+
+    if(error){
+        console.log(error.message)
+    }
+
+   
+
+
      return {
-            todos
+            todos,
+            students
       }
 
 
