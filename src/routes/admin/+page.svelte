@@ -41,6 +41,9 @@
    let todoModal = $state(false);
 
 
+   let {data} = $props();
+
+
 
 
 
@@ -181,22 +184,39 @@
         
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         
-        <div class="flex flex-row p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+          <div class="flex flex-row">
           <h3 class="mb-4 text-xl font-bold">To-do List</h3>
-          <div>
+        
             <Button  class="float-right ml-36" onclick={()=> todoModal = true }> Add </Button>
           </div>
-         
+          <div class="mt-5 overflow-scrollable">
+            <Table>
+              <TableHead>
+                <TableHeadCell>Todo</TableHeadCell>
+                </TableHead>
+                <TableBody tableBodyClass="divide-y">
+                  {#each data.todos ?? [] as todo}
+                  <TableBodyRow>
+                    <TableBodyCell>{todo.todo}</TableBodyCell>
+                  </TableBodyRow>
+                    {/each}
+                </TableBody>
+            </Table>
+
+            
+          </div>
+      
+   
         </div>
 
 
       
   
         <!-- Score Analysis Section -->
-        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h3 class="mb-4 text-xl font-bold">Score Analysis</h3>
+     
           <BarChart/>
-        </div>
+     
   
         <!-- Student Demographics Section -->
         <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">

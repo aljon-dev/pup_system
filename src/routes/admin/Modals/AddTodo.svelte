@@ -1,23 +1,43 @@
 <script lang="ts">
-
-import { Button, Modal } from 'flowbite-svelte';
-
-let { defaultModal = $bindable(false),
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 
-} = $props();
+import { Button, Input, Label, Modal } from 'flowbite-svelte';
+
+let { defaultModal = $bindable(false),} = $props();
+
+
+
+const addToSubmit:SubmitFunction = () =>{
+
+  return async ({result,update}) => {
+    const {status,data} = result as  {status:number,type:string,data:{msg:string,status:number}}
+
+    switch(status){
+        case 200: break;
+        case 400: break;
+        case 500: break;
+
+    }
+
+  }
+}
 
 
 
 </script>
 
-<Modal title="Terms of Service" bind:open={defaultModal} >
-  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.</p>
-  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.</p>
- 
-  <svelte:fragment slot="footer">
-    <Button>I accept</Button>
-    <Button color="alternative" onclick={()=> defaultModal = false}>Decline</Button>
-  </svelte:fragment>
+<Modal title="Add To Do List" bind:open={defaultModal} >
 
+  <form method="post" action="?/addTodo" >
+    <div class="mb-5">
+    <Label>Your Todo </Label>
+    <Input name="Todo"  placeholder="Todo" />  
+  </div>
+  
+
+    <Button type="submit">I accept</Button>
+    <Button color="alternative" onclick={()=> defaultModal = false}>Decline</Button>
+
+</form>
 </Modal>
