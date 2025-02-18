@@ -150,6 +150,16 @@ export const actions: Actions = {
         };
       }
     },
+
+
+    SignOut: async ({ locals: { supabase } }) => {
+
+        await supabase.auth.signOut(); 
+        redirect(303,'/')
+     
+    }
+
+
   };
   
 

@@ -2,7 +2,7 @@
 import { browser } from '$app/environment';
 
 
-import { Sidebar,SidebarGroup,SidebarItem,SidebarWrapper, NavHamburger} from 'flowbite-svelte'
+import { Sidebar,SidebarGroup,SidebarItem,SidebarWrapper, NavHamburger, Button} from 'flowbite-svelte'
 import { CloseCircleOutline, OpenDoorOutline } from 'flowbite-svelte-icons';
 import logo from '$lib/assets/pup3.png';
 	import RegistrationExam from './Component/RegistrationExam.svelte';
@@ -125,17 +125,17 @@ $effect(() => {
 
                 </SidebarItem>
 
-
-
             </SidebarGroup>
-
+       
             <SidebarGroup border>
-                <SidebarItem label="Sign Out" class="text-white font-semibold hover:bg-white hover:text-black">
-                  <svelte:fragment slot="icon">
-                    <OpenDoorOutline class="w-5 h-5" />
-                  </svelte:fragment>
-                </SidebarItem>
+                <form method="post" action="?/SignOut">
+                <Button type="submit" class=" float-left ml-5 py-2 font-semibold text-white hover:bg-white hover:text-black">
+                 Sign Out
+              </Button>
+            </form>
+                 
               </SidebarGroup>
+           
             </div>
         </SidebarWrapper>
     </Sidebar>
@@ -174,7 +174,7 @@ $effect(() => {
 
          firstName={firstname}
          lastName ={lastname}
-         
+
      />
 
 
