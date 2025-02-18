@@ -7,7 +7,13 @@
 
 	let currentStep = $state(1);
    
+	let firstname :string = $state('');
+	let lastname : string = $state('');
+	let studentnumber: number = $state(0);
+	let email :string = $state('');
 
+	let password :string = $state('');
+	let confirmpassword :string = $state('');
 
 
 
@@ -96,7 +102,7 @@
 			<div class="mb-8 text-center">
 				<h2 class="text-3xl font-extrabold text-[#800000]">PUP Student Portal</h2>
 				<p class="mt-2 text-sm text-gray-600">
-					Step {currentStep} of 4
+					Step {currentStep} of 3
 				</p>
 			</div>
 
@@ -108,8 +114,7 @@
 							id="firstName"
 							name="firstName"
 							type="text"
-				
-						
+							bind:value={firstname}
 							class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 						/>
 					
@@ -120,7 +125,7 @@
 							id="lastName"
 							name="lastName"
 							type="text"
-						
+							bind:value={lastname}
 							class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 						/>
 						
@@ -130,15 +135,13 @@
 			
 				<div class:hidden={currentStep !== 2} class="space-y-6">
 					<div>
-						<Label for="studentNumber" class="mb-2 font-semibold text-gray-900"
-							>Student Number</Label
-						>
+						<Label for="studentNumber" class="mb-2 font-semibold text-gray-900">Student Number</Label>
 						<Input
 							id="studentNumber"
 							name="studentNumber"
 							type="text"
 							placeholder="2020-00000-TG-0"
-						
+							bind:value={studentnumber}
 							class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 						/>
 						
@@ -161,7 +164,7 @@
 							name="email"
 							type="email"
 							placeholder="student@pup.edu.ph"
-						
+						    bind:value={email}
 							class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 						/>
 						
@@ -172,7 +175,7 @@
 							id="password"
 							name="password"
 							type="password"
-					
+					        bind:value={password}
 							class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 						/>
 						
@@ -186,43 +189,18 @@
 							id="confirmPassword"
 							name="confirmPassword"
 							type="password"
-						
+							bind:value={confirmpassword}
 							class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 						/>
 					
 					</div>
 					<div class="flex gap-4">
-						<Button type="button" color="alternative" class="w-1/2" onclick={previousStep}
-							>Back</Button
-						>
-						<Button type="button" class="w-1/2 bg-[#800000] hover:bg-[#600000]" onclick={nextStep}
-							>Next</Button
-						>
+						<Button type="button" color="alternative" class="w-1/2" onclick={previousStep}>Back</Button>
+						<Button type="submit" class="w-1/2 bg-[#800000] hover:bg-[#600000]">Register</Button>
 					</div>
 				</div>
 			
-				<div class:hidden={currentStep !== 4} class="space-y-6">
-					<div>
-						<Label for="documents" class="mb-2 font-semibold text-gray-900"
-							>Upload Required Documents</Label
-						>
-						<p class="mb-2 text-sm text-gray-700">
-							Please upload your school ID and registration form
-						</p>
-						<Fileupload
-                         id="documents"
-                        name="documents"
-                        type="file"
-                         accept=".pdf,.png,.jpg,.jpeg"
-/>
-					</div>
-					<div class="flex gap-4">
-						<Button type="button" color="alternative" class="w-1/2" onclick={previousStep}
-							>Back</Button
-						>
-						<Button type="submit" class="w-1/2 bg-[#800000] hover:bg-[#600000]">Submit</Button>
-					</div>
-				</div>
+				
 		
 		</div>
 	</form>

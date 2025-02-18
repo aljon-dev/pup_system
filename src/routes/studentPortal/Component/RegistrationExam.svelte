@@ -5,13 +5,93 @@
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import { enhance } from '$app/forms';
 
+	const desiredProgram = [
+
+	"Bachelor of Science in Computer Science (BSCS)",
+	"Bachelor of Science in Information Technology (BSIT)"	
+
+	]
+
+	const previousProgram = [
+	"Bachelor of Science in Accountancy (BSA)",
+	"Bachelor of Science in Management Accounting (BSMA)",
+    "Bachelor of Science in Business Administration Major in Financial Management (BSBAFM)",
+    "Bachelor of Science in Architecture (BS-ARCH)",
+    "Bachelor of Science in Environmental Planning (BSEP)",
+    "Bachelor of Arts in English (ABE)",
+    "Bachelor of Arts in Filipino (ABF)",
+    "Bachelor of Arts in Philosophy (ABPHILO)",
+    "Bachelor of Arts in Theater Arts (ABTA)",
+    "Bachelor of Science in Business Administration major in Marketing Management (BSBA-MM)",
+    "Bachelor of Science in Business Administration major in Human Resource Development Management (BSBA-HRDM)",
+    "Bachelor of Science in Entrepreneurship (BSEntrep)",
+    "Bachelor of Science in Office Administration (BSOA)",
+    "Bachelor in Advertising and Public Relation (BAPR)",
+    "Bachelor of Arts in Journalism (ABJ)",
+    "Bachelor of Arts on Broadcasting (BA Broadcasting)",
+    "Bachelor of Arts in Communication Research (ABCR)",
+    "Bachelor of Science in Computer Science (BSCS)",
+    "Bachelor of Science in Information Technology (BSIT)",
+    "Bachelor of Technology and Livelihood Education (BTLEd) major in Home Economics, Industrial Arts, Information and Communication Technology",
+    "Bachelor of Library and Information Science (BLIS)",
+    "Bachelor of Secondary Education (BSEd) major in English, Mathematics, Science, Filipino, Social Studies",
+    "Bachelor of Elementary Education (BEEd)",
+    "Bachelor of Early Childhood Education (BECEd)",
+    "Bachelor of Science in Civil Engineering (BSCE)",
+    "Bachelor of Science in Computer Engineering (BSCpE)",
+    "Bachelor of Science in Electrical Engineering (BSEE)",
+    "Bachelor of Science in Electronics Engineering (BSECE)",
+    "Bachelor of Science in Industrial Engineering (BSIE)",
+    "Bachelor of Science in Mechanical Engineering (BSME)",
+    "Bachelor of Science in Railway Engineering (formerly Bachelor of Science in Railway Engineering and Management) (BSRE)",
+    "Bachelor in Physical Education (BPE)",
+    "Bachelor of Arts in Political Science (BAPS)",
+    "Bachelor of Arts in Political Economy (BAPE)",
+    "Bachelor of Arts in International Studies (BAIS)",
+    "Bachelor of Public Administration (BPA)",
+    "Bachelor in Cooperatives (BC)",
+    "Bachelor of Arts in History (ABH)",
+    "Bachelor of Science in Economics (BSE)",
+    "Bachelor of Science in Psychology (BSPSY)",
+    "Bachelor of Science in Sociology (BSS)",
+    "Bachelor in Applied Statistics (BAS)",
+    "Bachelor of Science in Applied Mathematics (BSAM) major in Actuarial Mathematics",
+    "Bachelor of Science in Biology (BSBIO)",
+    "Bachelor of Science in Chemistry (BSCHEM)",
+    "Bachelor of Science in Food Technology (BSFT)",
+    "Bachelor of Science in Mathematics (BSM)",
+    "Bachelor of Science in Nutrition and Dietetics (BSND)",
+    "Bachelor of Science in Physics (BSP)",
+    "Bachelor of Science in Tourism Management (BSTM)",
+    "Bachelor in Transportation Management (BTM)",
+    "Bachelor of Science in Hospitality Management (BSHM)",
+    "Diploma in Information Communication Technology (DICT)" 
+]
+
+const Univerisities = [
+		"Technological University of the Philippines (TUP)",
+		"Polytechnic University of the Philippines (PUP)",
+		"University of Perpetual (UP)",
+		"University of the Philippines (UP)Diploma in Information and Communication Technology (DICT)"
+	]
+
+   
+
 	let currentStep = $state(1);
     let selectedTypes = $state('Transferee')
     let selectedGender = $state('Male')
+	let selecteduniversities = $state('');
+	let selectedPreviousProgram = $state('');
+	let selectedDesiredProgram = $state('');
 
-    let { firstName = $bindable(''), 
+
+
+    let { 
+		
+		firstName = $bindable(''), 
           lastName = $bindable(''), 
-          studentNumber = $bindable()
+      
+		
     } = $props();
 
 
@@ -128,6 +208,7 @@
 				<Input
 					id="firstName"
 					name="firstName"
+					bind:value={firstName}
 					type="text"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 				/>
@@ -137,6 +218,7 @@
 				<Input
 					id="lastName"
 					name="lastName"
+					bind:value={lastName}
 					type="text"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 				/>
@@ -162,7 +244,7 @@
 			</div>
 
             <div>
-				<Label for="firstName" class="mb-2 font-semibold text-gray-900">Student Type</Label>
+				<Label for="firstName" class="mb-2 font-semibold text-gray-900">Gender</Label>
 				<Select bind:value={selectedGender} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
                     {#each gender as  genderType}
                     <option>{genderType}</option>
@@ -186,6 +268,7 @@
 					id="email"
 					name="email"
 					type="email"
+					
 					placeholder="student@pup.edu.ph"
 					class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]"
 				/>
@@ -226,27 +309,27 @@
 
             <div>
 				<Label for="Previous School" class="mb-2 font-semibold text-gray-900">Name of Previous School</Label>
-				<Select bind:value={selectedGender} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
-                    {#each gender as  genderType}
-                    <option>{genderType}</option>
+				<Select bind:value={selecteduniversities} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
+                    {#each Univerisities as  univerisity}
+                    <option>{univerisity}</option>
                     {/each}
                 </Select>
 			</div>
 
             <div>
 				<Label for="Previous Program," class="mb-2 font-semibold text-gray-900">Name of Previous Program</Label>
-				<Select bind:value={selectedGender} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
-                    {#each gender as  genderType}
-                    <option>{genderType}</option>
+				<Select bind:value={selectedPreviousProgram} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
+                    {#each previousProgram as  programs}
+                    <option>{programs}</option>
                     {/each}
                 </Select>
 			</div>
 
             <div>
 				<Label for="Applying To," class="mb-2 font-semibold text-gray-900">Name of Program Applying To</Label>
-				<Select bind:value={selectedGender} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
-                    {#each gender as  genderType}
-                    <option>{genderType}</option>
+				<Select bind:value={selectedDesiredProgram} class="border-gray-300 bg-white text-gray-900 focus:border-[#800000] focus:ring-[#800000]">
+                    {#each desiredProgram as  desireprogram}
+                    <option>{desireprogram}</option>
                     {/each}
                 </Select>
 			</div>

@@ -184,7 +184,10 @@
 				  <p class="text-xs text-gray-500 text-center">
 					Thru Login you can see your account status schedules of exams etc.
 				  </p>
+				
+
 				</form>
+				<p class="flex justify-center mt-5 hover:text-red-500 font-semibold"> <a href="/SignUp"> No Account Yet? Register here </a> </p>
 			  </Card>
 			</div>
 		  </div>

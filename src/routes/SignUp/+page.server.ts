@@ -13,7 +13,7 @@ export const actions: Actions = {
             const studentNumber = formData.get('studentNumber') as string;
             const email = formData.get('email') as string;
             const password = formData.get('password') as string;
-            const documents = formData.get('documents') as File;
+        
 
            
             console.log('First Name:', firstname );
@@ -21,7 +21,7 @@ export const actions: Actions = {
             console.log('Student Number:', studentNumber);
             console.log('Email:', email);
             console.log('Password:', password);
-            console.log('Documents:', documents);
+      
 
             // Validate form data
             if (!email || !password) {
@@ -33,6 +33,8 @@ export const actions: Actions = {
                     }
                 };
             }
+
+            
 
             // Create auth user
             const { data: authData, error: authError } = await supabase.auth.signUp({
@@ -62,7 +64,7 @@ export const actions: Actions = {
                 };
             }
 
-            // Handle document upload
+            /* Handle document upload
             let documentUrl: string | null = null;
             if (documents) {
                 const { data: storageData, error: uploadError } = await supabase.storage
@@ -84,7 +86,7 @@ export const actions: Actions = {
                 }
 
                 documentUrl = storageData?.path || null;
-            }
+            } */
 
             // Insert into students table
             const { error: insertError } = await supabase
@@ -95,7 +97,6 @@ export const actions: Actions = {
                     last_name: lastname,
                     student_number: studentNumber,
                     email: email,
-                    documents: documentUrl
                 });
 
             if (insertError) {

@@ -12,6 +12,14 @@ let isOpen = $state(true);
 let isMobile =  $state(false);
 let Navigator = $state('Announcement');
 
+let {data} = $props();
+
+
+let firstname = $state(data.student?.first_name);
+let lastname = $state(data.student?.last_name);
+let studentnumber = $state(data.student?.student_number);
+
+
 
 let NavigatorList = ([
     'Announcement',
@@ -20,6 +28,9 @@ let NavigatorList = ([
     'Registration',
     'Status',
 ])
+
+
+
 
 $effect(() => {
 
@@ -159,7 +170,13 @@ $effect(() => {
   
     <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
     
-     <RegistrationExam/>
+     <RegistrationExam 
+     firstName={firstname}
+     lastName ={lastname}
+   
+     
+     
+     />
 
 
 
