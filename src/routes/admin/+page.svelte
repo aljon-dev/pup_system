@@ -203,12 +203,8 @@
                   </TableBodyRow>
                     {/each}
                 </TableBody>
-            </Table>
-
-            
+            </Table>  
           </div>
-      
-   
         </div>
 
         <!-- Score Analysis Section -->
