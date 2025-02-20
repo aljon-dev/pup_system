@@ -3,72 +3,110 @@
 	  Label, 
 	  Input, 
 	  Select,
-	 
 	  Button,
 	  Fileupload,
-	
 	} from 'flowbite-svelte';
   
-	interface UserData {
-	  [key: string]: string | File | null | undefined;
-	  firstName: string;
-	  lastName: string;
-	  middleName: string;
-	  email: string;
-	  gender: string;
-	  address: string;
-	  residency: string;
-	  contactNumber: string;
-	  program: string;
-	  applyingTo: string;
-	  schoolIdImage: File | null;
-	  corImage: File | null;
-	  status: "PENDING" | "APPROVED" | "REJECTED";
-	}
+
+    let {
+        firstname = $bindable(''),
+        lastname = $bindable(''),
+        middleName = $bindable(''),
+        email = $bindable(''),
+        gender = $bindable(''),
+        address = $bindable(''),
+        residency = $bindable(''),
+        contactNumber = $bindable(''),
+        program = $bindable(''),
+        applyingTo = $bindable(''),
+        university = $bindable(''),
+        schoolId = $bindable(''),
+        cor = $bindable(''),
+        previousprogram = $bindable(''),
+        registrationStatus = $bindable(''),
+      } = $props();
+
+
+
+
+
+
+      
+	const desiredProgram = [
+
+        "Bachelor of Science in Computer Science (BSCS)",
+        "Bachelor of Science in Information Technology (BSIT)"	
+
+   ]
+
+const previousProgram = [
+"Bachelor of Science in Accountancy (BSA)",
+"Bachelor of Science in Management Accounting (BSMA)",
+"Bachelor of Science in Business Administration Major in Financial Management (BSBAFM)",
+"Bachelor of Science in Architecture (BS-ARCH)",
+"Bachelor of Science in Environmental Planning (BSEP)",
+"Bachelor of Arts in English (ABE)",
+"Bachelor of Arts in Filipino (ABF)",
+"Bachelor of Arts in Philosophy (ABPHILO)",
+"Bachelor of Arts in Theater Arts (ABTA)",
+"Bachelor of Science in Business Administration major in Marketing Management (BSBA-MM)",
+"Bachelor of Science in Business Administration major in Human Resource Development Management (BSBA-HRDM)",
+"Bachelor of Science in Entrepreneurship (BSEntrep)",
+"Bachelor of Science in Office Administration (BSOA)",
+"Bachelor in Advertising and Public Relation (BAPR)",
+"Bachelor of Arts in Journalism (ABJ)",
+"Bachelor of Arts on Broadcasting (BA Broadcasting)",
+"Bachelor of Arts in Communication Research (ABCR)",
+"Bachelor of Science in Computer Science (BSCS)",
+"Bachelor of Science in Information Technology (BSIT)",
+"Bachelor of Technology and Livelihood Education (BTLEd) major in Home Economics, Industrial Arts, Information and Communication Technology",
+"Bachelor of Library and Information Science (BLIS)",
+"Bachelor of Secondary Education (BSEd) major in English, Mathematics, Science, Filipino, Social Studies",
+"Bachelor of Elementary Education (BEEd)",
+"Bachelor of Early Childhood Education (BECEd)",
+"Bachelor of Science in Civil Engineering (BSCE)",
+"Bachelor of Science in Computer Engineering (BSCpE)",
+"Bachelor of Science in Electrical Engineering (BSEE)",
+"Bachelor of Science in Electronics Engineering (BSECE)",
+"Bachelor of Science in Industrial Engineering (BSIE)",
+"Bachelor of Science in Mechanical Engineering (BSME)",
+"Bachelor of Science in Railway Engineering (formerly Bachelor of Science in Railway Engineering and Management) (BSRE)",
+"Bachelor in Physical Education (BPE)",
+"Bachelor of Arts in Political Science (BAPS)",
+"Bachelor of Arts in Political Economy (BAPE)",
+"Bachelor of Arts in International Studies (BAIS)",
+"Bachelor of Public Administration (BPA)",
+"Bachelor in Cooperatives (BC)",
+"Bachelor of Arts in History (ABH)",
+"Bachelor of Science in Economics (BSE)",
+"Bachelor of Science in Psychology (BSPSY)",
+"Bachelor of Science in Sociology (BSS)",
+"Bachelor in Applied Statistics (BAS)",
+"Bachelor of Science in Applied Mathematics (BSAM) major in Actuarial Mathematics",
+"Bachelor of Science in Biology (BSBIO)",
+"Bachelor of Science in Chemistry (BSCHEM)",
+"Bachelor of Science in Food Technology (BSFT)",
+"Bachelor of Science in Mathematics (BSM)",
+"Bachelor of Science in Nutrition and Dietetics (BSND)",
+"Bachelor of Science in Physics (BSP)",
+"Bachelor of Science in Tourism Management (BSTM)",
+"Bachelor in Transportation Management (BTM)",
+"Bachelor of Science in Hospitality Management (BSHM)",
+"Diploma in Information Communication Technology (DICT)" 
+]
+
+const Univerisities = [
+    "Technological University of the Philippines (TUP)",
+    "Polytechnic University of the Philippines (PUP)",
+    "University of Perpetual (UP)",
+    "University of the Philippines (UP)Diploma in Information and Communication Technology (DICT)"
+]
+      
+
 	
-	let userData: UserData = {
-	  firstName: "John",
-	  lastName: "Doe",
-	  middleName: "Smith",
-	  email: "john.doe@email.com",
-	  gender: "",
-	  address: "",
-	  residency: "",
-	  contactNumber: "",
-	  program: "",
-	  applyingTo: "",
-	  schoolIdImage: null,
-	  corImage: null,
-	  status: "PENDING"
-	};
-  
-	const universities = [
-	  "University of Example",
-	  "Sample State University",
-	  "Test Technical University",
-	  "Demo Institute of Technology"
-	];
-  
-	function handleUpdate(field: keyof UserData) {
-	  return function(event: Event) {
-		const target = event.target as HTMLInputElement | HTMLSelectElement;
-		if (target) {
-		  userData[field] = target.value;
-		}
-	  }
-	}
-  
-	function handleFileUpload(event: Event, field: 'schoolIdImage' | 'corImage'): void {
-	  const target = event.target as HTMLInputElement;
-	  if (target?.files?.[0]) {
-		userData[field] = target.files[0];
-	  }
-	}
-  
-	function handleSubmit(event: SubmitEvent): void {
-	  event.preventDefault();
-	  console.log('Form data:', userData);
-	}
+
+	
+	
   </script>
   
   
@@ -77,14 +115,13 @@
 	  <div class="p-8">
 		<h1 class="text-2xl font-bold mb-6">EXAM REGISTRATION STATUS</h1>
 		
-		<form on:submit={handleSubmit} class="space-y-6">
-
+		<form class="space-y-6">
 		  <div class="grid md:grid-cols-4 gap-6">
 			<div>
 			  <Label for="firstName">First Name</Label>
 			  <Input 
-				id="firstName"
-				value={userData.firstName}
+                bind:value={firstname}
+			
 				readonly
 				class="bg-gray-50"
 			  />
@@ -92,8 +129,7 @@
 			<div>
 			  <Label for="lastName">Last Name</Label>
 			  <Input 
-				id="lastName"
-				value={userData.lastName}
+                bind:value={lastname}
 				readonly
 				class="bg-gray-50"
 			  />
@@ -101,8 +137,7 @@
 			<div>
 			  <Label for="middleName">Middle Name</Label>
 			  <Input 
-				id="middleName"
-				value={userData.middleName}
+				bind:value={middleName}
 				readonly
 				class="bg-gray-50"
 			  />
@@ -110,8 +145,7 @@
 			<div>
 			  <Label for="email">Email</Label>
 			  <Input 
-				id="email"
-				value={userData.email}
+				bind:value={email}
 				readonly
 				class="bg-gray-50"
 			  />
@@ -122,22 +156,21 @@
 			<div>
 			  <Label for="gender">Gender</Label>
 			  <Select 
-				id="gender"
-				value={userData.gender}
-				on:change={handleUpdate('gender')}
+				bind:value={gender}
 			  >
-				<option value="">Select Gender</option>
-				<option value="male">Male</option>
-				<option value="female">Female</option>
-				<option value="other">Other</option>
+
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+	
 			  </Select>
+
+              <input type="hidden" bind:value={gender} />
 			</div>
 			<div>
 			  <Label for="address">Address</Label>
 			  <Input 
 				id="address"
-				value={userData.address}
-				on:change={handleUpdate('address')}
+			    bind:value={address}
 				placeholder="Enter your address"
 			  />
 			</div>
@@ -145,8 +178,8 @@
 			  <Label for="residency">Residency</Label>
 			  <Input 
 				id="residency"
-				value={userData.residency}
-				on:change={handleUpdate('residency')}
+                bind:value={residency}
+			
 				placeholder="Enter your residency"
 			  />
 			</div>
@@ -154,8 +187,8 @@
 			  <Label for="contactNumber">Contact Number</Label>
 			  <Input 
 				id="contactNumber"
-				value={userData.contactNumber}
-				on:change={handleUpdate('contactNumber')}
+                bind:value={contactNumber}
+			
 				placeholder="Enter contact number"
 			  />
 			</div>
@@ -163,41 +196,62 @@
   
 		  <div class="grid md:grid-cols-3 gap-6">
 			<div>
-			  <Label for="program">Program</Label>
-			  <Input 
-				id="program"
-				value={userData.program}
-				on:change={handleUpdate('program')}
-				placeholder="Enter your program"
-			  />
-			</div>
+                <Label>Applying To</Label>
+                <Select  bind:value={previousprogram}
+                  
+                >
+                  
+                  {#each previousProgram as program}
+                    <option value={ program}>{ program}</option>
+                  {/each}
+                </Select>
+                <input type="hidden" bind:value={previousprogram} />
+  
+              </div>
 			<div>
 			  <Label>Applying To</Label>
-			  <Select 
-				value={userData.applyingTo}
-				on:change={handleUpdate('applyingTo')}
+			  <Select  bind:value={applyingTo}
+				
 			  >
-				<option value="">Select University</option>
-				{#each universities as university}
-				  <option value={university}>{university}</option>
+				
+				{#each desiredProgram as desiredProgram}
+				  <option value={desiredProgram}>{desiredProgram}</option>
 				{/each}
 			  </Select>
+              <input type="hidden" bind:value={applyingTo} />
+
 			</div>
+
+            <div>
+                <Label>Univerisities</Label>
+                <Select  bind:value={university}
+                  
+                >
+                  
+                  {#each Univerisities as university}
+                    <option value={university}>{university}</option>
+                  {/each}
+                </Select>
+                <input type="hidden" bind:value={university} />
+  
+              </div>
 		  </div>
   
 		  <div class="grid md:grid-cols-2 gap-6">
 			<div>
 			  <Label for="schoolId">School ID Picture</Label>
 			  <Fileupload 
-				id="schoolId"
-				on:change={(e) => handleFileUpload(e, 'schoolIdImage')}
+				placeholder={schoolId}
+                
+				
 			  />
 			</div>
 			<div>
 			  <Label for="cor">Certificate of Registration (COR)</Label>
 			  <Fileupload 
-				id="cor"
-				on:change={(e) => handleFileUpload(e, 'corImage')}
+				placeholder={cor}
+
+              
 			  />
 			</div>
 		  </div>
@@ -205,13 +259,13 @@
 		  <div class="border p-4 rounded-lg bg-gray-50">
 			<Label class="text-lg">Registration Status</Label>
 			<div class="text-xl font-semibold mt-2">
-			  {#if userData.status === 'PENDING'}
+		
 				<span class="text-yellow-600">PENDING</span>
-			  {:else if userData.status === 'APPROVED'}
+			
 				<span class="text-green-600">APPROVED</span>
-			  {:else}
+		
 				<span class="text-red-600">REJECTED</span>
-			  {/if}
+			
 			</div>
 		  </div>
   

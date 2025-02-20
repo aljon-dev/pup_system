@@ -18,7 +18,21 @@ let {data} = $props();
 
 let firstname = $state(data.student?.first_name);
 let lastname = $state(data.student?.last_name);
-let studentnumber = $state(data.student?.student_number);
+
+let middlename  = $state(data.registrationStatus?.midllename);
+let email  = $state(data.registrationStatus?.emailAddress);
+let gender = $state(data.registrationStatus?.gender);
+let address = $state(data.registrationStatus?.address);
+let residency = $state(data.registrationStatus?.Details.residency);
+let contact = $state(data.registrationStatus?.Details.contactnumber);
+let applyingTo = $state(data.registrationStatus?.Details.applyingTo);
+let univerisities = $state(data.registrationStatus?.Details.universities);
+let cor = $state(data.registrationStatus?.Details.COR);
+let schoolId = $state(data.registrationStatus?.Details.schoolId);
+let previousProgram = $state(data.registrationStatus?.Details.previousProgram);
+
+
+
 
 
 
@@ -175,6 +189,8 @@ $effect(() => {
 
          firstName={firstname}
          lastName ={lastname}
+       
+
 
      />
 
@@ -189,7 +205,22 @@ $effect(() => {
     {#if Navigator == NavigatorList[4]}
   
     <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
-     <RegistrationStatus/>
+     <RegistrationStatus
+        firstname={firstname}
+        lastname={lastname}
+        middleName={middlename}
+        email={email}
+        address={address}
+        gender={gender}
+        residency={residency}
+        contactNumber={contact}
+        applyingTo={applyingTo}
+        university = {univerisities}
+        cor = {cor}
+        schoolId = {schoolId}
+        previousprogram = {previousProgram}
+        
+     />
     </main>
    
     {/if}

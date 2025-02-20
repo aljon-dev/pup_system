@@ -12,16 +12,24 @@ export const load: PageServerLoad = async ({locals:{supabase,user},request}) => 
         throw redirect(303,'/')
     }
        
-    const { data:student, error:studentError} = await supabase
+     const { data:student, error:studentError} = await supabase
         .from('students')
         .select("*")
         .eq('user_id', user!.id) 
         .single() as PostgrestSingleResponse<students>
+
      
+      const {data:registrationStatus, error:registrationError} = await supabase
+         .from('studentRegistration')
+         .select("*")
+         .eq('user_id', user!.id)
+         .single();
+
 
    
 
         return {
+            registrationStatus,
             student
         }
     
