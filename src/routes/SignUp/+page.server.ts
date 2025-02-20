@@ -1,4 +1,16 @@
-import type { Actions } from "./$types";
+
+import { redirect } from "@sveltejs/kit";
+import type { Actions,PageServerLoad } from "./$types";
+
+
+
+export const load: PageServerLoad = async ({locals:{supabase,user}}) => {
+
+    if(user!.id != null){
+        return redirect(303,'/studentPortal')
+    }
+    
+};
 
 export const actions: Actions = {
     userSignUp: async ({ locals: { supabase }, request }) => {

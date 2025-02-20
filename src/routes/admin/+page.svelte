@@ -162,7 +162,8 @@
   
         <!-- Bottom Group (Sign Out) -->
         <SidebarGroup border>
-          <Button  class="text-white  font-semibold hover:bg-white hover:text-black">
+          <form action="/SignOut" method="post"> 
+          <Button type="submit"   color="alternative" class="text-white  font-semibold hover:bg-white hover:text-black">
             
              <div class="flex flex-row gap-2"> 
               <OpenDoorOutline class="w-5 h-5" /> <p>Sign Out </p>
@@ -171,6 +172,8 @@
               
             
           </Button>
+
+          </form>
         </SidebarGroup>
       </div>
       </SidebarWrapper>

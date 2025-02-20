@@ -11,14 +11,15 @@
  }
 
 
- export type stuentRegistration = {
+ export type studentRegistration = {
 
    id:number,
    user_id:string,
-   first_name:string,
-   last_name:string,
-   midllename:string,
+   firstname:string,
+   lastname:string,
+   middlename:string,
    emailAddress:string,
+   address:string,
    gender:string,
    status:string,
    Details:{

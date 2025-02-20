@@ -10,6 +10,7 @@
     } from 'flowbite-svelte';
   
     let {
+  
       firstname = $bindable(''),
       lastname = $bindable(''),
       middleName = $bindable(''),
@@ -25,6 +26,9 @@
       cor = $bindable(''),
       previousprogram = $bindable(''),
       registrationStatus = $bindable(''),
+      isModalOpen = $bindable(false),
+      onClose = $bindable(() => {})
+
     } = $props();
   
     const desiredProgram = [
@@ -95,24 +99,14 @@
       "University of the Philippines (UP)Diploma in Information and Communication Technology (DICT)"
     ];
   
-    let isModalOpen = false;
   
-    function openModal() {
-      isModalOpen = true;
-    }
   
-    function closeModal() {
-      isModalOpen = false;
-    }
+    
   </script>
   
-  <div class="flex-1">
-    <div class="p-8">
-      <Button on:click={openModal} color="blue">Open Registration Status</Button>
-    </div>
-  </div>
   
-  <Modal bind:open={isModalOpen} on:close={closeModal}>
+  
+  <Modal bind:open={isModalOpen} onclose={() =>onClose()}>
     <div class="p-8">
       <h1 class="text-2xl font-bold mb-6">EXAM REGISTRATION STATUS</h1>
       

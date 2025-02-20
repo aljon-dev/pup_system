@@ -1,3 +1,4 @@
+import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad,Actions } from "./$types";
 
 
@@ -54,9 +55,16 @@ export const actions: Actions = {
         if(insertError){
                 console.log(insertError.message)
         }
+    },
 
 
+    SignOut: async ({ locals: { supabase } }) => {
 
+        await supabase.auth.signOut(); 
+        redirect(303,'/')
+     
     }
+
+
     
 };
