@@ -30,7 +30,7 @@ let univerisities = $state(data.registrationStatus?.Details.universities);
 let cor = $state(data.registrationStatus?.Details.COR);
 let schoolId = $state(data.registrationStatus?.Details.schoolId);
 let previousProgram = $state(data.registrationStatus?.Details.previousProgram);
-
+let registrationStatus  = $state(data.registrationStatus?.status);
 
 
 
@@ -186,12 +186,8 @@ $effect(() => {
     <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
     
      <RegistrationExam 
-
          firstName={firstname}
          lastName ={lastname}
-       
-
-
      />
 
 
@@ -219,6 +215,7 @@ $effect(() => {
         cor = {cor}
         schoolId = {schoolId}
         previousprogram = {previousProgram}
+        registrationStatus = {registrationStatus}
         
      />
     </main>

@@ -126,6 +126,7 @@ export const actions: Actions = {
             gender:gender,
             address:address,
             emailAddress:emailAddress,
+            status:'pending',
             Details: {
               studentType: selectedType,
               residency,

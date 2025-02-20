@@ -27,11 +27,6 @@
       } = $props();
 
 
-
-
-
-
-      
 	const desiredProgram = [
 
         "Bachelor of Science in Computer Science (BSCS)",
@@ -250,8 +245,6 @@ const Univerisities = [
 			  <Label for="cor">Certificate of Registration (COR)</Label>
 			  <Fileupload 
 				placeholder={cor}
-
-              
 			  />
 			</div>
 		  </div>
@@ -259,13 +252,14 @@ const Univerisities = [
 		  <div class="border p-4 rounded-lg bg-gray-50">
 			<Label class="text-lg">Registration Status</Label>
 			<div class="text-xl font-semibold mt-2">
-		
-				<span class="text-yellow-600">PENDING</span>
-			
+
+                {#if registrationStatus == "pending"}
+                <span class="text-yellow-600">PENDING</span>
+                {:else if registrationStatus == "approved"}
 				<span class="text-green-600">APPROVED</span>
-		
+                {:else if registrationStatus == "rejected"}
 				<span class="text-red-600">REJECTED</span>
-			
+                {/if}
 			</div>
 		  </div>
   
