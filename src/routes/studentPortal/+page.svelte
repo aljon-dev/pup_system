@@ -6,6 +6,7 @@ import { Sidebar,SidebarGroup,SidebarItem,SidebarWrapper, NavHamburger, Button} 
 import { CloseCircleOutline, OpenDoorOutline } from 'flowbite-svelte-icons';
 import logo from '$lib/assets/pup3.png';
 	import RegistrationExam from './Component/RegistrationExam.svelte';
+	import RegistrationStatus from './Component/RegistrationStatus.svelte';
 
 
 let isOpen = $state(true);
@@ -188,7 +189,7 @@ $effect(() => {
     {#if Navigator == NavigatorList[4]}
   
     <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
-    <p>EXAM REGISTRATION STATUS</p>
+     <RegistrationStatus/>
     </main>
    
     {/if}
