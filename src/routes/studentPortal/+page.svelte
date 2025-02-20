@@ -36,6 +36,8 @@ let registrationStatus  = $state(data.registrationStatus?.status);
 
 
 
+
+
 let NavigatorList = ([
     'Announcement',
     'Schedule',

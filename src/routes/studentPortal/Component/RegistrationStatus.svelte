@@ -5,6 +5,7 @@
 	  Select,
 	  Button,
 	  Fileupload,
+	  A,
 	} from 'flowbite-svelte';
   
 
@@ -179,7 +180,10 @@ const Univerisities = [
 			  />
 			</div>
 			<div>
+             
 			  <Label for="contactNumber">Contact Number</Label>
+               
+         
 			  <Input 
 				id="contactNumber"
                 bind:value={contactNumber}
@@ -188,14 +192,12 @@ const Univerisities = [
 			  />
 			</div>
 		  </div>
-  
+          
 		  <div class="grid md:grid-cols-3 gap-6">
 			<div>
                 <Label>Applying To</Label>
                 <Select  bind:value={previousprogram}
-                  
                 >
-                  
                   {#each previousProgram as program}
                     <option value={ program}>{ program}</option>
                   {/each}
@@ -206,7 +208,6 @@ const Univerisities = [
 			<div>
 			  <Label>Applying To</Label>
 			  <Select  bind:value={applyingTo}
-				
 			  >
 				
 				{#each desiredProgram as desiredProgram}
@@ -220,7 +221,6 @@ const Univerisities = [
             <div>
                 <Label>Univerisities</Label>
                 <Select  bind:value={university}
-                  
                 >
                   
                   {#each Univerisities as university}
@@ -234,7 +234,14 @@ const Univerisities = [
   
 		  <div class="grid md:grid-cols-2 gap-6">
 			<div>
-			  <Label for="schoolId">School ID Picture</Label>
+                <div class="flex flex-row gap-5">
+                    {#if cor != ""}
+           
+			  <Label for="cor">School ID Picture</Label>
+              <A href="{cor}" target="_blank" class="mb-2">View Here</A>
+
+              {/if}
+            </div>
 			  <Fileupload 
 				placeholder={schoolId}
                 
@@ -242,7 +249,14 @@ const Univerisities = [
 			  />
 			</div>
 			<div>
+                <div class="flex flex-row gap-5">
+                    {#if cor != ""}
+           
 			  <Label for="cor">Certificate of Registration (COR)</Label>
+              <A href="{cor}" target="_blank" class="mb-2">View Here</A>
+
+              {/if}
+            </div>
 			  <Fileupload 
 				placeholder={cor}
 			  />
