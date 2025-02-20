@@ -30,7 +30,7 @@
 	import BarChart from './Components/BarChart.svelte';
 	import DonutChart from './Components/DonutChart.svelte';
 	import PieChart from './Components/PieChart.svelte';
-	import CreateExams from './DashboarComponents/CreateExams.svelte';
+	import CreateExams from './Modals/CreateExams.svelte';
 	import AddTodo from './Modals/AddTodo.svelte';
 	import StudentList from './DashboarComponents/StudentList.svelte';
   
@@ -162,11 +162,15 @@
   
         <!-- Bottom Group (Sign Out) -->
         <SidebarGroup border>
-          <SidebarItem label="Sign Out" class="text-white font-semibold hover:bg-white hover:text-black">
-            <svelte:fragment slot="icon">
-              <OpenDoorOutline class="w-5 h-5" />
-            </svelte:fragment>
-          </SidebarItem>
+          <Button  class="text-white  font-semibold hover:bg-white hover:text-black">
+            
+             <div class="flex flex-row gap-2"> 
+              <OpenDoorOutline class="w-5 h-5" /> <p>Sign Out </p>
+
+             </div>
+              
+            
+          </Button>
         </SidebarGroup>
       </div>
       </SidebarWrapper>
@@ -280,6 +284,8 @@
     </main>
 
     {/if}
+
+    <!-- MODALS HERE -->
 
     <AddTodo  defaultModal = {todoModal}/>
 
