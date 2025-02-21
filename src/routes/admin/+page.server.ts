@@ -65,7 +65,7 @@ export const actions: Actions = {
 
         const { error: updateError } = await supabase.from("studentRegistration").update({
 
-            status: "accepted"
+            status: "approved"
 
         }).eq('user_id', userid)
 
