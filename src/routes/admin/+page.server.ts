@@ -25,9 +25,6 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
         console.log(error.message)
     }
 
-
-
-
     return {
         todos,
         students,
