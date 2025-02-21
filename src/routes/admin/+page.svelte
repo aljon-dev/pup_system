@@ -1,296 +1,277 @@
 <script lang="ts">
-  import logo from '$lib/assets/pup3.png';
-  import { 
-    Sidebar,
-    SidebarGroup,
-    SidebarItem,
-    SidebarWrapper,
-    DarkMode,
-    Navbar,
-    NavHamburger,
-    Button,
-    Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell
-  } from 'flowbite-svelte';
-  import { 
-    ChartPieOutline,
-    UserCircleOutline,
-    CalendarWeekOutline,
-    FileChartBarOutline,
-    OpenDoorOutline,
-    UserSettingsOutline,
-    RectangleListOutline,
-    ArchiveOutline,
-    CloseOutline,
-
-	CloseCircleOutline
-
-
-  } from 'flowbite-svelte-icons';
-	 import {browser}  from '$app/environment'
+	import logo from '$lib/assets/pup3.png';
+	import {
+		Sidebar,
+		SidebarGroup,
+		SidebarItem,
+		SidebarWrapper,
+		DarkMode,
+		Navbar,
+		NavHamburger,
+		Button,
+		Table,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell
+	} from 'flowbite-svelte';
+	import {
+		ChartPieOutline,
+		UserCircleOutline,
+		CalendarWeekOutline,
+		FileChartBarOutline,
+		OpenDoorOutline,
+		UserSettingsOutline,
+		RectangleListOutline,
+		ArchiveOutline,
+		CloseOutline,
+		CloseCircleOutline
+	} from 'flowbite-svelte-icons';
+	import { browser } from '$app/environment';
 	import BarChart from './Components/BarChart.svelte';
 	import DonutChart from './Components/DonutChart.svelte';
 	import PieChart from './Components/PieChart.svelte';
 	import CreateExams from './Modals/CreateExams.svelte';
 	import AddTodo from './Modals/AddTodo.svelte';
 	import StudentList from './DashboarComponents/StudentList.svelte';
-  
-  
-   let isOpen = $state(true);
-   let isMobile = $state(false);
-   let Navigator = $state('Dashboard');
-   let navIndex = $state(0);
-   let todoModal = $state(false);
 
+	let isOpen = $state(true);
+	let isMobile = $state(false);
+	let Navigator = $state('Dashboard');
+	let navIndex = $state(0);
+	let todoModal = $state(false);
 
-   let {data} = $props();
+	let { data } = $props();
 
+	let NavigatorList = [
+		'Dashboard',
+		'CreateExams',
+		'Students',
+		'Analytics',
+		'Test Bank',
+		'Calendar'
+	];
 
+	$effect(() => {
+		if (browser) {
+			const mediaQuery = window.matchMedia('(max-width:767px)');
+			isMobile = mediaQuery.matches;
 
+			const handleSize = () => {
+				isMobile = mediaQuery.matches;
+				isOpen = !isMobile;
+			};
+			mediaQuery.addEventListener('change', handleSize);
+			return () => mediaQuery.removeEventListener('change', handleSize);
+		}
+	});
 
+	function Navigation(navigation: number): void {
+		Navigator = NavigatorList[navigation];
+	}
+</script>
 
-   let NavigatorList = ([
-    'Dashboard',
-    'CreateExams',
-    'Students',
-    'Analytics',
-    'Test Bank',
-    'Calendar',
-   ])
+<div class="flex min-h-screen flex-col md:flex-row">
+	<!-- Mobile Hamburger -->
+	<div class="top:0 left-0 z-50 p-4 md:hidden">
+		{#if isOpen == false}
+			<NavHamburger onclick={() => (isOpen = !isOpen)} />
+		{/if}
+	</div>
 
+	<!-- Sidebar -->
+	{#if isOpen}
+		<Sidebar class=" fixed z-40 md:relative ">
+			<SidebarWrapper class="  h-full w-64 overflow-hidden bg-red-900 ">
+				<div class="left-0 top-0 z-50 p-4 md:hidden">
+					<CloseCircleOutline onclick={() => (isOpen = !isOpen)} />
+				</div>
+				<div class="fixed">
+					<div class="flex justify-center p-4">
+						<img src={logo} alt="logo" class="h-20 w-auto" />
+					</div>
 
+					<SidebarGroup>
+						<!-- Dashboard -->
+						<SidebarItem
+							label="Dashboard"
+							onclick={() => Navigation(0)}
+							class="font-semibold text-white hover:bg-white hover:text-black"
+						>
+							<svelte:fragment slot="icon">
+								<ChartPieOutline class="h-5 w-5" />
+							</svelte:fragment>
+						</SidebarItem>
 
-   $effect(()=>{
+						<!-- Create Exams -->
+						<SidebarItem
+							label="Create Exams"
+							onclick={() => Navigation(1)}
+							class="font-semibold text-white hover:bg-white hover:text-black"
+						>
+							<svelte:fragment slot="icon">
+								<RectangleListOutline class="h-5 w-5" />
+							</svelte:fragment>
+						</SidebarItem>
 
-      if(browser){
-        const mediaQuery = window.matchMedia('(max-width:767px)');
-        isMobile = mediaQuery.matches
+						<!-- Students -->
+						<SidebarItem
+							label="Students"
+							onclick={() => Navigation(2)}
+							class="font-semibold text-white hover:bg-white hover:text-black"
+						>
+							<svelte:fragment slot="icon">
+								<UserCircleOutline class="h-5 w-5" />
+							</svelte:fragment>
+						</SidebarItem>
 
-        const handleSize = () =>{
-          isMobile = mediaQuery.matches
-          isOpen = !isMobile;
+						<!-- Analytics -->
+						<SidebarItem
+							label="Analytics"
+							onclick={() => Navigation(3)}
+							class="font-semibold text-white hover:bg-white hover:text-black"
+						>
+							<svelte:fragment slot="icon">
+								<FileChartBarOutline class="h-5 w-5" />
+							</svelte:fragment>
+						</SidebarItem>
 
-      }
-      mediaQuery.addEventListener('change',handleSize)
-      return () => mediaQuery.removeEventListener('change',handleSize)
-  }
-  
-   })
+						<!-- Test Bank -->
+						<SidebarItem
+							label="Test Bank"
+							onclick={() => Navigation(4)}
+							class="font-semibold text-white hover:bg-white hover:text-black"
+						>
+							<svelte:fragment slot="icon">
+								<ArchiveOutline class="h-5 w-5" />
+							</svelte:fragment>
+						</SidebarItem>
 
-   function Navigation(navigation:number): void{
+						<!-- Calendar -->
+						<SidebarItem
+							label="Calendar"
+							onclick={() => Navigation(5)}
+							class="font-semibold text-white hover:bg-white hover:text-black"
+						>
+							<svelte:fragment slot="icon">
+								<CalendarWeekOutline class="h-5 w-5" />
+							</svelte:fragment>
+						</SidebarItem>
+					</SidebarGroup>
 
-     Navigator = NavigatorList[navigation]
-      
-   }
+					<!-- Bottom Group (Sign Out) -->
+					<SidebarGroup border>
+						<form action="?/SignOut" method="post">
+							<Button
+								type="submit"
+								color="alternative"
+								class="font-semibold  text-white hover:bg-white hover:text-black"
+							>
+								<div class="flex flex-row gap-2">
+									<OpenDoorOutline class="h-5 w-5" />
+									<p>Sign Out</p>
+								</div>
+							</Button>
+						</form>
+					</SidebarGroup>
+				</div>
+			</SidebarWrapper>
+		</Sidebar>
+	{/if}
 
+	{#if Navigator == NavigatorList[0]}
+		<div>
+			<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
+				<!-- To-do List Section -->
 
- 
+				<div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+					<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+						<div class="flex flex-row">
+							<h3 class="mb-4 text-xl font-bold">To-do List</h3>
 
+							<Button class="float-right ml-36" onclick={() => (todoModal = true)}>Add</Button>
+						</div>
+						<div class="overflow-scrollable mt-5">
+							<Table>
+								<TableHead>
+									<TableHeadCell>Todo</TableHeadCell>
+								</TableHead>
+								<TableBody tableBodyClass="divide-y">
+									{#each data.todos ?? [] as todo}
+										<TableBodyRow>
+											<TableBodyCell>{todo.todo}</TableBodyCell>
+										</TableBodyRow>
+									{/each}
+								</TableBody>
+							</Table>
+						</div>
+					</div>
 
- 
-  </script>
-  
-  <div class="flex flex-col md:flex-row min-h-screen">
-    <!-- Mobile Hamburger -->
-    <div class="md:hidden top:0 left-0 z-50 p-4">
-      {#if isOpen == false}
-      <NavHamburger onclick={() => (isOpen = !isOpen)} />
-      {/if}
-    </div>
-   
-    <!-- Sidebar -->
-     {#if isOpen}
-     
-    <Sidebar  class=" fixed md:relative z-40 ">
-      
-      <SidebarWrapper class="  bg-red-900 w-64 h-full overflow-hidden ">
-        <div class="md:hidden top-0 left-0 z-50 p-4">
-        
-        <CloseCircleOutline onclick={() => (isOpen = !isOpen)} />
-      
+					<!-- Score Analysis Section -->
+					<BarChart />
+					<!-- Student Demographics Section -->
+					<PieChart />
+				</div>
 
-        </div>
-        <div class="fixed">
-        <div class="flex justify-center p-4">
-          <img src={logo} alt="logo" class="h-20 w-auto">
-        </div>
-    
-        <SidebarGroup >
+				<!-- Exam Statistics Section -->
+				<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+					<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+						<h3 class="mb-4 text-xl font-bold">Passed/Failed per exam</h3>
+						<DonutChart />
+						<!-- Add chart here -->
+					</div>
+					<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+						<h3 class="mb-4 text-xl font-bold">Number of Exam Created</h3>
+						<DonutChart />
+					</div>
+					<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+						<h3 class="mb-4 text-xl font-bold">Recent Top Performing Students</h3>
+						<Table>
+							<TableHead>
+								<TableHeadCell>Name</TableHeadCell>
+								<TableHeadCell>Color</TableHeadCell>
+								<TableHeadCell>Category</TableHeadCell>
+							</TableHead>
+							<TableBody>
+								<TableBodyRow>
+									<TableBodyCell>Apple</TableBodyCell>
+									<TableBodyCell>Sliver</TableBodyCell>
+									<TableBodyCell>Laptop</TableBodyCell>
+								</TableBodyRow>
+								<TableBodyRow>
+									<TableBodyCell>Microsoft</TableBodyCell>
+									<TableBodyCell>White</TableBodyCell>
+									<TableBodyCell>Laptop PC</TableBodyCell>
+								</TableBodyRow>
+								<TableBodyRow>
+									<TableBodyCell>Magic Mouse 2</TableBodyCell>
+									<TableBodyCell>Black</TableBodyCell>
+									<TableBodyCell>Accessories</TableBodyCell>
+								</TableBodyRow>
+							</TableBody>
+						</Table>
+					</div>
+					<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+						<h3 class="mb-4 text-xl font-bold">Item Analysis Table</h3>
+						<!-- Add table here -->
+					</div>
+				</div>
+			</main>
+		</div>
+	{/if}
 
-          
-          <!-- Dashboard -->
-          <SidebarItem label="Dashboard"  onclick={()=> Navigation(0)} class="text-white font-semibold hover:bg-white hover:text-black">
-            <svelte:fragment slot="icon">
-              <ChartPieOutline class="w-5 h-5" />
-            </svelte:fragment>
-          </SidebarItem>
-  
-          <!-- Create Exams -->
-          <SidebarItem  label="Create Exams" onclick={()=> Navigation(1)} class="text-white font-semibold hover:bg-white hover:text-black">
-            <svelte:fragment   slot="icon">
-              <RectangleListOutline  class="w-5 h-5"  />
-            </svelte:fragment>
-          </SidebarItem>
-  
-          <!-- Students -->
-          <SidebarItem label="Students" onclick={()=> Navigation(2)} class="text-white font-semibold hover:bg-white hover:text-black">
-            <svelte:fragment slot="icon">
-              <UserCircleOutline class="w-5 h-5" />
-            </svelte:fragment>
-          </SidebarItem>
-  
-          <!-- Analytics -->
-          <SidebarItem label="Analytics" onclick={()=> Navigation(3)} class="text-white font-semibold hover:bg-white hover:text-black">
-            <svelte:fragment slot="icon">
-              <FileChartBarOutline class="w-5 h-5" />
-            </svelte:fragment>
-          </SidebarItem>
-  
-          <!-- Test Bank -->
-          <SidebarItem label="Test Bank" onclick={()=> Navigation(4)} class="text-white font-semibold hover:bg-white hover:text-black">
-            <svelte:fragment slot="icon">
-              <ArchiveOutline class="w-5 h-5" />
-            </svelte:fragment>
-          </SidebarItem>
-  
-          <!-- Calendar -->
-          <SidebarItem label="Calendar"  onclick={()=> Navigation(5)} class="text-white font-semibold hover:bg-white hover:text-black">
-            <svelte:fragment slot="icon">
-              <CalendarWeekOutline class="w-5 h-5" />
-            </svelte:fragment>
-          </SidebarItem>
-        </SidebarGroup>
-  
-        <!-- Bottom Group (Sign Out) -->
-        <SidebarGroup border>
-          <form action="/SignOut" method="post"> 
-          <Button type="submit"   color="alternative" class="text-white  font-semibold hover:bg-white hover:text-black">
-            
-             <div class="flex flex-row gap-2"> 
-              <OpenDoorOutline class="w-5 h-5" /> <p>Sign Out </p>
+	{#if Navigator == NavigatorList[1]}
+		<CreateExams />
+	{/if}
 
-             </div>
-              
-            
-          </Button>
+	{#if Navigator == NavigatorList[2]}
+		<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
+			<StudentList {data} />
+		</main>
+	{/if}
 
-          </form>
-        </SidebarGroup>
-      </div>
-      </SidebarWrapper>
-   
-    </Sidebar>
- 
+	<!-- MODALS HERE -->
 
-    {/if}
- 
-  
-    {#if Navigator == NavigatorList[0]}
-
-    <div>
-    <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
-      <!-- To-do List Section -->
-        
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-        
-        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <div class="flex flex-row">
-          <h3 class="mb-4 text-xl font-bold">To-do List</h3>
-        
-            <Button  class="float-right ml-36" onclick={()=> todoModal = true }> Add </Button>
-          </div>
-          <div class="mt-5 overflow-scrollable">
-            <Table>
-              <TableHead>
-                <TableHeadCell>Todo</TableHeadCell>
-                </TableHead>
-                <TableBody tableBodyClass="divide-y">
-                  {#each data.todos ?? [] as todo}
-                  <TableBodyRow>
-                    <TableBodyCell>{todo.todo}</TableBodyCell>
-                  </TableBodyRow>
-                    {/each}
-                </TableBody>
-            </Table>  
-          </div>
-        </div>
-
-        <!-- Score Analysis Section -->
-        <BarChart/>
-        <!-- Student Demographics Section -->
-        <PieChart/>
-       
-      </div>
-  
-      <!-- Exam Statistics Section -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h3 class="mb-4 text-xl font-bold">Passed/Failed per exam</h3>
-          <DonutChart/>
-          <!-- Add chart here -->
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h3 class="mb-4 text-xl font-bold">Number of Exam Created</h3>
-          <DonutChart/>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h3 class="mb-4 text-xl font-bold">Recent Top Performing Students</h3>
-          <Table  >
-            <TableHead>
-              <TableHeadCell> Name</TableHeadCell>
-              <TableHeadCell>Color</TableHeadCell>
-              <TableHeadCell>Category</TableHeadCell>
-           
-            </TableHead>
-            <TableBody >
-              <TableBodyRow>
-                <TableBodyCell>Apple </TableBodyCell>
-                <TableBodyCell>Sliver</TableBodyCell>
-                <TableBodyCell>Laptop</TableBodyCell>
-            
-              </TableBodyRow>
-              <TableBodyRow>
-                <TableBodyCell>Microsoft </TableBodyCell>
-                <TableBodyCell>White</TableBodyCell>
-                <TableBodyCell>Laptop PC</TableBodyCell>
-          
-              </TableBodyRow>
-              <TableBodyRow>
-                <TableBodyCell>Magic Mouse 2</TableBodyCell>
-                <TableBodyCell>Black</TableBodyCell>
-                <TableBodyCell>Accessories</TableBodyCell>
-              
-              </TableBodyRow>
-            </TableBody>
-          </Table>
-        
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h3 class="mb-4 text-xl font-bold">Item Analysis Table</h3>
-          <!-- Add table here -->
-        </div>
-      </div>
-    </main>
-    </div>
-
-    {/if}
-
-    {#if Navigator == NavigatorList[1]}
-        <CreateExams/>
-
-    {/if}
-
-
-    {#if Navigator == NavigatorList[2]}
-
-    <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
-    <StudentList {data}/>
-    </main>
-
-    {/if}
-
-    <!-- MODALS HERE -->
-
-    <AddTodo  defaultModal = {todoModal}/>
-
-  </div>
- 
+	<AddTodo defaultModal={todoModal} />
+</div>
