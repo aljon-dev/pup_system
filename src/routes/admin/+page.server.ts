@@ -1,70 +1,128 @@
 import { redirect } from "@sveltejs/kit";
-import type { PageServerLoad,Actions } from "./$types";
+import type { PageServerLoad, Actions } from "./$types";
 
 
-export const load: PageServerLoad = async ({locals:{supabase}}) => {
+export const load: PageServerLoad = async ({ locals: { supabase } }) => {
 
 
-    const{data:todos,error:error } = await supabase.from('todo').select("*")
+    const { data: todos, error: error } = await supabase.from('todo').select("*")
 
-    if(error){
+    if (error) {
         console.log(error.message)
     }
 
 
-    const{data:students,error:errorstudent } = await supabase.from('students').select("*")
+    const { data: students, error: errorstudent } = await supabase.from('students').select("*")
 
-    if(error){
+    if (error) {
         console.log(error.message)
     }
 
 
-    const{data:studentsRegister,error:errorRegister } = await supabase.from('studentRegistration').select("*")
+    const { data: studentsRegister, error: errorRegister } = await supabase.from('studentRegistration').select("*")
 
-    if(error){
+    if (error) {
         console.log(error.message)
     }
 
 
 
 
-     return {
-            todos,
-            students,
-            studentsRegister
-      }
+    return {
+        todos,
+        students,
+        studentsRegister
+    }
 
 
-    
+
 };
 
 export const actions: Actions = {
 
 
-    addTodo: async ({locals:{supabase},request}) => {
+    addTodo: async ({ locals: { supabase }, request }) => {
 
 
         const formData = await request.formData();
 
         const Todo = formData.get('Todo');
-        
-        const {error:insertError} = await supabase.from('todo').insert({
-                todo:Todo
+
+        const { error: insertError } = await supabase.from('todo').insert({
+            todo: Todo
         })
 
-        if(insertError){
-                console.log(insertError.message)
+        if (insertError) {
+            console.log(insertError.message)
         }
     },
+
+    Accepted: async ({ locals: { supabase }, request }) => {
+
+        const formData = await request.formData();
+
+        const userid = formData.get('userId');
+
+        const { error: updateError } = await supabase.from("studentRegistration").update({
+
+            status: "accepted"
+
+        }).eq('user_id', userid)
+
+
+        if (updateError) {
+            return {
+                status: 500,
+                data: {
+                    msg: updateError.message,
+                    status: 500
+                }
+            }
+        }
+
+
+
+    },
+
+    Rejected: async ({ locals: { supabase }, request }) => {
+
+        const formData = await request.formData();
+
+        const userid = formData.get('userId');
+
+        const { error: updateError } = await supabase.from("studentRegistration").update({
+
+            status: "rejected"
+
+        }).eq('user_id', userid)
+
+
+        if (updateError) {
+            return {
+                status: 500,
+                data: {
+                    msg: updateError.message,
+                    status: 500
+                }
+            }
+        }
+
+    },
+
+
+
+
+
+
 
 
     SignOut: async ({ locals: { supabase } }) => {
 
-        await supabase.auth.signOut(); 
-        redirect(303,'/')
-     
+        await supabase.auth.signOut();
+        redirect(303, '/')
+
     }
 
 
-    
+
 };

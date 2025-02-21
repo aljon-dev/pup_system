@@ -1,64 +1,77 @@
 <script lang="ts">
-  import { Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
-  import StudentStatusForm from '../Modals/studentStatusForm.svelte';
+	import {
+		Button,
+		Table,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell
+	} from 'flowbite-svelte';
+	import StudentStatusForm from '../Modals/studentStatusForm.svelte';
 	import type { studentRegistration } from '$lib/types';
 
+	let { data } = $props();
 
-  let { data } = $props();
+	let openModal = $state(false);
+	let studentInfo = $state<studentRegistration>({});
 
-  let openModal = $state(false);
-  let studentInfo = $state<studentRegistration>({});
+	const viewStudentRegistration = (students: studentRegistration) => {
+		studentInfo = students;
+		openModal = true;
+	};
 
-  const viewStudentRegistration = (students: studentRegistration) => {
-    studentInfo = students;
-    openModal = true;
-  }
-
-  const closeModal = () => {
-    openModal = false;
-  };
-
+	const closeModal = () => {
+		openModal = false;
+	};
 </script>
 
-<StudentStatusForm 
-  isModalOpen={openModal}
-  firstname={studentInfo.firstname}
-  lastname={studentInfo.lastname}
-  middleName={studentInfo.middlename}
-  email={studentInfo.emailAddress}
-  address={studentInfo.address}
-  gender={studentInfo.gender}
-  residency={studentInfo.Details?.residency}
-  contactNumber={studentInfo.Details?.contactnumber}
-  applyingTo={studentInfo.Details?.applyingTo}
-  university={studentInfo.Details?.universities}
-  cor={studentInfo.Details?.COR}
-  schoolId={studentInfo.Details?.schoolId}
-  previousprogram={studentInfo.Details?.previousProgram}
-  registrationStatus={studentInfo.status}
-  onClose={closeModal}
+<StudentStatusForm
+	userid={studentInfo.user_id}
+	isModalOpen={openModal}
+	firstname={studentInfo.firstname}
+	lastname={studentInfo.lastname}
+	middleName={studentInfo.middlename}
+	email={studentInfo.emailAddress}
+	address={studentInfo.address}
+	gender={studentInfo.gender}
+	residency={studentInfo.Details?.residency}
+	contactNumber={studentInfo.Details?.contactnumber}
+	applyingTo={studentInfo.Details?.applyingTo}
+	university={studentInfo.Details?.universities}
+	cor={studentInfo.Details?.COR}
+	schoolId={studentInfo.Details?.schoolId}
+	previousprogram={studentInfo.Details?.previousProgram}
+	registrationStatus={studentInfo.status}
+	onClose={closeModal}
 />
 
 <Table>
-  <TableHead>
-    <TableHeadCell>First Name</TableHeadCell>
-    <TableHeadCell>Last Name</TableHeadCell>
-    <TableHeadCell>Residency</TableHeadCell>
-    <TableHeadCell>Email</TableHeadCell>
-    <TableHeadCell>Actions</TableHeadCell>
-  </TableHead>
-  <TableBody tableBodyClass="divide-y">
-    {#each data.studentsRegister ?? [] as student}
-      <TableBodyRow>
-        <TableBodyCell>{student.firstname}</TableBodyCell>
-        <TableBodyCell>{student.lastname}</TableBodyCell>
-        <TableBodyCell>{student.Details.residency} Years</TableBodyCell>
-        <TableBodyCell>{student.emailAddress}</TableBodyCell>
-        <TableBodyCell>
-          <Button color="blue" onclick={() => { viewStudentRegistration(student); }} size="sm">View</Button>
-          <Button color="red" size="sm">Delete</Button>
-        </TableBodyCell>
-      </TableBodyRow>
-    {/each}
-  </TableBody>
+	<TableHead>
+		<TableHeadCell>First Name</TableHeadCell>
+		<TableHeadCell>Last Name</TableHeadCell>
+		<TableHeadCell>Residency</TableHeadCell>
+		<TableHeadCell>Email</TableHeadCell>
+		<TableHeadCell>Actions</TableHeadCell>
+	</TableHead>
+	<TableBody tableBodyClass="divide-y">
+		{#each data.studentsRegister ?? [] as student}
+			<TableBodyRow>
+				<TableBodyCell>{student.firstname}</TableBodyCell>
+				<TableBodyCell>{student.lastname}</TableBodyCell>
+				<TableBodyCell>{student.Details.residency} Years</TableBodyCell>
+				<TableBodyCell>{student.emailAddress}</TableBodyCell>
+				<TableBodyCell class="flex flex-row gap-2">
+					<Button
+						color="blue"
+						onclick={() => {
+							viewStudentRegistration(student);
+						}}
+						size="sm">View</Button
+					>
+					<Button color="red" size="sm">Delete</Button>
+				</TableBodyCell>
+			</TableBodyRow>
+		{/each}
+	</TableBody>
 </Table>
