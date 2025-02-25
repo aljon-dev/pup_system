@@ -145,21 +145,52 @@ export const actions: Actions = {
                     }
                 }
             }
+        },
 
-            
-
-
-
-
-    },
-
-
-
-
-
-
-
-
+        QuestionBank: async ({ locals: { supabase }, request }) => {
+            const formData = await request.formData();
+        
+            // Extract form data
+            const question_text = formData.get('question_text') as string;
+            const type = formData.get('type') as 'mcq' | 'true_false' | 'programming';
+            const correct_answer = formData.get('correctAnswer') as string;
+            const category = formData.get('category') as string | null;
+        
+            // Prepare the data object based on the question type
+            let options = null;
+            if (type === 'mcq') {
+              options = ['A', 'B', 'C', 'D'].map((letter, index) => ({
+                letter,
+                value: formData.get(`answer-${index}`) as string,
+              }));
+            }
+        
+            // Insert the data into Supabase
+            const { data, error } = await supabase
+              .from('question_bank')
+              .insert([
+                {
+                  question_text,
+                  type,
+                  options,
+                  correct_answer,
+                  category,
+                },
+              ]);
+        
+            if (error) {
+                console.log(error.message)
+              return {
+                success: false,
+                error: error.message,
+              };
+            }
+        
+            return {
+              success: true,
+            };
+          },
+        
 
     SignOut: async ({ locals: { supabase } }) => {
 

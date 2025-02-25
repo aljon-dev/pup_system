@@ -112,8 +112,7 @@
 				{#each Array(48) as _, i}
 					<div
 						class="transform rounded border border-white/20 transition-all duration-700"
-						style="animation: float {2 + (i % 3)}s ease-in-out infinite alternate-reverse {i *
-							0.1}s"
+						style="animation: float {2 + (i % 3)}s ease-in-out infinite alternate-reverse {i *0.1}s"
 					></div>
 				{/each}
 			</div>
