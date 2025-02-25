@@ -36,6 +36,7 @@
 	import AddTodo from './Modals/AddTodo.svelte';
 	import StudentList from './DashboarComponents/StudentList.svelte';
 	import Exams from './DashboarComponents/Exams.svelte';
+	import TestBank from './DashboarComponents/TestBank.svelte';
 
 	let isOpen = $state(true);
 	let isMobile = $state(false);
@@ -263,7 +264,9 @@
 	{/if}
 
 	{#if Navigator == NavigatorList[1]}
-		<Exams />
+	<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
+		<Exams {data} />
+	</main>
 	{/if}
 
 	{#if Navigator == NavigatorList[2]}
@@ -271,6 +274,24 @@
 			<StudentList {data} />
 		</main>
 	{/if}
+
+
+	{#if Navigator == NavigatorList[3]}
+		
+	{/if}
+
+	
+	{#if Navigator == NavigatorList[4]}
+		<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
+			<TestBank {data} />
+		</main>
+	{/if}
+
+
+
+
+	
+
 
 	<!-- MODALS HERE -->
 

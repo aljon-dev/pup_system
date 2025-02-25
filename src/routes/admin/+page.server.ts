@@ -25,10 +25,20 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
         console.log(error.message)
     }
 
+
+    const { data: ExamList, error: ExamlistError } = await supabase.from('exams').select("*")
+
+    if (ExamlistError) {
+        console.log(ExamlistError.message)
+    }
+
+    
+
     return {
         todos,
         students,
-        studentsRegister
+        studentsRegister,
+        ExamList,
     }
 
 
