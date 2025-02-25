@@ -14,15 +14,15 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
 
     const { data: students, error: errorstudent } = await supabase.from('students').select("*")
 
-    if (error) {
-        console.log(error.message)
+    if (errorstudent) {
+        console.log(errorstudent.message)
     }
 
 
     const { data: studentsRegister, error: errorRegister } = await supabase.from('studentRegistration').select("*")
 
-    if (error) {
-        console.log(error.message)
+    if (errorRegister) {
+        console.log(errorRegister.message)
     }
 
 
