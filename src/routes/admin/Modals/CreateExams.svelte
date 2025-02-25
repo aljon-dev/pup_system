@@ -1,16 +1,21 @@
 <script lang="ts">
+	import { Button, Input, Label, Modal, P } from "flowbite-svelte";
 
-    
+
+    let {openModal = $bindable(false)} = $props();
 
 
 
 </script>
 
-<div>
-    <main class="flex-2 p-4 bg-gray-50 dark:bg-gray-900 w-full md:ml-0 mt-16 md:mt-0">
-     
-        
-      
-    
-    </main>
-</div>
+
+  <Modal title="Creating Exam Subject" bind:open={openModal}   >
+        <div class="flex flex-row grid grid-cols-1">
+            <form>
+                <div class="flex flex-col p-2">
+                    <Label>Exam Name</Label>
+                    <Input type="text" name="exam_name" placeholder="Enter your exam name here"/>
+                </div>              
+            </form>
+        </div>
+  </Modal>

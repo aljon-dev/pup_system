@@ -35,6 +35,7 @@
 	import CreateExams from './Modals/CreateExams.svelte';
 	import AddTodo from './Modals/AddTodo.svelte';
 	import StudentList from './DashboarComponents/StudentList.svelte';
+	import Exams from './DashboarComponents/Exams.svelte';
 
 	let isOpen = $state(true);
 	let isMobile = $state(false);
@@ -262,7 +263,7 @@
 	{/if}
 
 	{#if Navigator == NavigatorList[1]}
-		<CreateExams />
+		<Exams />
 	{/if}
 
 	{#if Navigator == NavigatorList[2]}
