@@ -1,15 +1,22 @@
 <script lang="ts">
 	import { Button, Input, Label, Modal, P, Radio, Select } from "flowbite-svelte";
 
+   
+	import { onMount } from "svelte";
+
 
     let {openModal = $bindable(false)} = $props();
 
     let studentTypeChoose = $state('Non Tech');
     let opt = $state('MCQ');
- 
-    let chooseTrueFalse = $state('True');
 
+    let chooseTrueFalse = $state('True');
     let selectedAnswer = $state('');
+
+
+    
+    let code = $state('');
+    let language = $state('python');
 
     let chooseType = ([
         'Non Tech',
@@ -35,14 +42,18 @@
         'D',
     ])
 
+  
+    window.onmessage = function (e) {
+            if (e.data && e.data.language) {
+               
+                
+              
+            }
+        };
 
-    $effect(()=>{
-
-      
 
 
-
-    })
+        
 
 
 
@@ -98,6 +109,13 @@
                     
             
                     {#if opt === 'Programming'}
+                    <iframe 
+                    id="oc-editor"
+                    frameBorder="0" 
+                    height="450px"
+                    src="https://onecompiler.com/embed/python?codeChangeEvent=true"
+                    width="100%"
+                   ></iframe>
 
                 
 
