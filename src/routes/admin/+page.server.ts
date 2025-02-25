@@ -77,8 +77,6 @@ export const actions: Actions = {
             }
         }
 
-
-
     },
 
     Rejected: async ({ locals: { supabase }, request }) => {
@@ -105,6 +103,46 @@ export const actions: Actions = {
         }
 
     },
+
+
+    CreateExam : async ({locals:{supabase},request}) =>{
+
+            const formData = await request.formData();
+            const examname =  formData.get('exam_name') as string;
+            const examdescription = formData.get('exam_description') as string;
+            const duration = Number(formData.get('exam_duration'))
+            const examschedule  = new Date(formData.get('exam_schedule') as string)
+            const studenttype = formData.get('student_type') as string;
+            
+
+            const {error:insertError} = await supabase.from('exams').insert({
+                name: examname,
+                description: examdescription,
+                duration: duration,
+                scheduled_at: examschedule,
+                student_type:studenttype
+            })
+
+            if(insertError){
+                console.log(insertError.message)
+               
+            }else{
+                return {
+                    status: 200,
+                    data: {
+                        msg: "Exam Created Successfully",
+                        status: 200
+                    }
+                }
+            }
+
+            
+
+
+
+
+    },
+
 
 
 
