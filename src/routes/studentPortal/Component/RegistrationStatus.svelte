@@ -98,11 +98,6 @@ const Univerisities = [
     "University of the Philippines (UP)Diploma in Information and Communication Technology (DICT)"
 ]
       
-
-	
-
-	
-	
   </script>
   
   
@@ -117,7 +112,6 @@ const Univerisities = [
 			  <Label for="firstName">First Name</Label>
 			  <Input 
                 bind:value={firstname}
-			
 				readonly
 				class="bg-gray-50"
 			  />
