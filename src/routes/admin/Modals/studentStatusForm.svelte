@@ -19,7 +19,7 @@
 		previousprogram = $bindable(''),
 		registrationStatus = $bindable(''),
 		isModalOpen = $bindable(false),
-		onClose = $bindable(() => {})
+	
 	} = $props();
 
 	const desiredProgram = [
@@ -91,7 +91,7 @@
 	];
 </script>
 
-<Modal bind:open={isModalOpen} onclose={() => onClose()}>
+<Modal bind:open={isModalOpen}>
 	<div class="p-8">
 		<h1 class="mb-6 text-2xl font-bold">EXAM REGISTRATION STATUS</h1>
 

@@ -8,10 +8,9 @@
 
 </script>
 
-
   <Modal title="Creating Exam Subject" bind:open={openModal}   >
         <div class="flex flex-row grid grid-cols-1">
-            <form>
+            <form method="post" action="?/CreateSubject">
                 <div class="flex flex-col p-2">
                     <Label>Exam Name</Label>
                     <Input type="text" name="exam_name" placeholder="Enter your exam name here"/>

@@ -16,19 +16,16 @@
 	let openModal = $state(false);
 	let studentInfo = $state<studentRegistration>({});
 
-	const viewStudentRegistration = (students: studentRegistration) => {
+	let viewStudentRegistration = (students: studentRegistration) => {
 		studentInfo = students;
 		openModal = true;
 	};
 
-	const closeModal = () => {
-		openModal = false;
-	};
+	
 </script>
 
 <StudentStatusForm
 	userid={studentInfo.user_id}
-	isModalOpen={openModal}
 	firstname={studentInfo.firstname}
 	lastname={studentInfo.lastname}
 	middleName={studentInfo.middlename}
@@ -43,7 +40,7 @@
 	schoolId={studentInfo.Details?.schoolId}
 	previousprogram={studentInfo.Details?.previousProgram}
 	registrationStatus={studentInfo.status}
-	onClose={closeModal}
+	bind:isModalOpen={ openModal }
 />
 
 <Table>
