@@ -2,6 +2,7 @@
 	import { Button, Card, Hr, P } from "flowbite-svelte";
 	import CreateExams from "../Modals/CreateExams.svelte";
 	import { EditSolid, TrashBinSolid } from "flowbite-svelte-icons";
+	import AddQuestionExam from "../Modals/addQuestionExam.svelte";
 
     let examModal= $state(false);
 
@@ -18,6 +19,7 @@
 
 </script>
 <CreateExams bind:openModal={examModal} />
+<AddQuestionExam  {data}/>
 
     <div class="h-min-screen w-full p-8"> 
         <div class="flex flex-row justify-between">

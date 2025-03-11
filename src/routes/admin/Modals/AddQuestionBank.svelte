@@ -1,21 +1,22 @@
 <script lang="ts">
 	import { Button, Input, Label, Modal, P, Radio, Select, Textarea } from "flowbite-svelte";
+  import { type Result, type CodeData } from "$lib/types";
 
    
-	import { onMount } from "svelte";
+	
 
 
     let {openModal = $bindable(false)} = $props();
 
     let studentTypeChoose = $state('Non Tech');
-    let opt = $state('MCQ');
+    let opt = $state('mcq');
 
 
     let inputs = $state(['', '', '', '']); // Array to store input values
     let chooseTrueFalse = $state('True');
     let selectedAnswer = $state('');
 
-    let codeData = $state([]);
+    let codeData = $state<CodeData | null>(null);
 
 
     let programminglanguage = [
@@ -36,17 +37,6 @@
         'Tech'
     ])
 
-    let trueFalse = ([
-        'True',
-        'False'
-    ])
-
-
-    let  chooseOption = ([
-        'MCQ',
-        'True/False',
-        'Programming',
-    ])
     
     let letters  = ([
         'A',
@@ -56,12 +46,12 @@
     ])
 
   
-   window.onmessage = function (e) {
+   window.onmessage = function (e:MessageEvent) {
     if (e.data && e.data.action) {
-        codeData = e.data;
+        codeData = e.data as CodeData
     }
 
-    if(e.data.action === "runComplete"){
+    if(e.data.action === "runComplete"  && codeData?.result){
      selectedAnswer = codeData.result.output
      alert(selectedAnswer)
     }

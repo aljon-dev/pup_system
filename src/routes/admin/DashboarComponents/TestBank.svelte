@@ -56,7 +56,6 @@
 
     <AddQuestionBank bind:openModal={openModal} />
 
-
     <div class="flex flex-row justify-between">
         <P class="font-semibold"> Question Bank </P>
        <div class="flex flex-row gap-5">
