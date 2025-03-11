@@ -32,6 +32,13 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
         console.log(ExamlistError.message)
     }
 
+
+     const  {data:questionBank, error:bankError} = await supabase.from('question_bank').select("*")
+
+     if(bankError){
+        console.log(bankError.message);
+     }
+
     
 
     return {
@@ -39,6 +46,7 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
         students,
         studentsRegister,
         ExamList,
+        questionBank,
     }
 
 

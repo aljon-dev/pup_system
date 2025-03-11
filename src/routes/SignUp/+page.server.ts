@@ -22,8 +22,7 @@ export const actions: Actions = {
             const studentNumber = formData.get('studentNumber') as string;
             const email = formData.get('email') as string;
             const password = formData.get('password') as string;
-        
-
+    
            
             console.log('First Name:', firstname );
             console.log('Last Name:', lastname);
