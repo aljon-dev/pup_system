@@ -105,8 +105,7 @@
 <div class="min-h-screen bg-white">
 	<section
 		class="relative overflow-hidden bg-red-800 py-24 text-white"
-		in:fade={{ duration: 1000 }}
-	>
+		in:fade={{ duration: 1000 }}>
 		<div class="absolute inset-0 opacity-10">
 			<div class="grid h-full grid-cols-12 gap-4">
 				{#each Array(48) as _, i}
@@ -121,10 +120,8 @@
 		<div class="container mx-auto px-6 lg:px-8">
 			<div class="mx-auto max-w-7xl">
 				<div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-					<div
-						class="mx-auto max-w-2xl text-center md:mx-0 md:text-left"
-						in:fly={{ x: -50, duration: 1000, delay: 300 }}
-					>
+					<div class="mx-auto max-w-2xl text-center md:mx-0 md:text-left"
+						in:fly={{ x: -50, duration: 1000, delay: 300 }}>
 						<div class="mb-8 flex items-center justify-center space-x-2 md:justify-start">
 							<img
 								src={logo}
