@@ -3,8 +3,11 @@
     import { type Result, type CodeData } from "$lib/types";
     import { EditOutline } from "flowbite-svelte-icons";
     
-    let openModal = true;
-    let programming = $state('python'); // Default programming language
+
+    let {formModal = $bindable(false),
+         examId = $bindable()} = $props();
+    
+    let programming = $state('python'); 
     let codeData = $state<CodeData | null>(null);
 
     let programminglanguage = ['python', 'java', 'javascript', 'kotlin', 'c++'];
@@ -15,10 +18,10 @@
     type: 'mcq',
     options: ['', '', '', ''],
     selectedAnswer: '',
-    programming: 'python', // Default programming language for each question
+    programming: 'python', 
 }]);
 
-    // Map to track iframes and their questionIds
+
     let iframeMap = $state<Map<Window, number>>(new Map());
 
     const addQuestions = () => {
@@ -44,7 +47,6 @@
         if (e.data && e.data.action) {
             codeData = e.data as CodeData;
 
-            // Look up the questionId using the iframeMap
             const questionId = iframeMap.get(e.source as Window);
             if (questionId === undefined) {
                 console.error("Unable to find questionId for iframe:", e.source);
@@ -57,11 +59,7 @@
                 console.log("Run complete with result:", codeData.result);
 
                 if (questions[questionId]) {
-                    // Update the selectedAnswer with the code execution result
                     questions[questionId].selectedAnswer = codeData.result.output;
-
-                    // Log the updated selectedAnswer
-                    console.log("Updated selectedAnswer for question", questionId, ":", questions[questionId].selectedAnswer);
                 } else {
                     console.error("Question index out of range:", questionId);
                 }
@@ -69,21 +67,23 @@
         }
     };
 
-    // Use $derived to create a reactive iframeSrc
+  
     let iframeSrc = $derived(`https://onecompiler.com/embed/${programming}?codeChangeEvent=true`);
    
 
     </script>
     
-    <Modal title="Adding Questions" bind:open={openModal}>
+    <Modal title="Adding Questions" bind:open={formModal}>
         <div class="flex justify-center space-y-4 max-h-96 overflow-y-auto p-2">
-            <form method="POST" action="?/QuestionBank">
+            <form method="POST" action="?/AddQuestions">
+                
                 {#each questions as question, questionIndex}
+                <Input type="hidden" name="examId" value={examId}/> 
                     <div class="mb-6 w-[500px]">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-lg font-medium">Question {questionIndex + 1}</h3>
                             {#if questions.length > 1}
-                                <Button color="red" size="xs" on:click={() => removeQuestions(questionIndex)}>
+                                <Button color="red" size="xs" onclick={() => removeQuestions(questionIndex)}>
                                     Remove
                                 </Button>
                             {/if}
@@ -157,7 +157,8 @@
                                 height="450px"
                                 src={`https://onecompiler.com/embed/${question.programming}?codeChangeEvent=true`}
                                 width="100%"
-                                on:load={(e) => {
+                                onload={(e) => {
+                                   
                                     const iframe = e.currentTarget as HTMLIFrameElement;
                                     iframeMap.set(iframe.contentWindow!, questionIndex);
                                     console.log("Iframe loaded for question:", questionIndex);
@@ -185,7 +186,7 @@
                 
                 <div class="flex flex-row justify-end gap-2">
                     <Button type="submit" color="blue">Create</Button>
-                    <Button type="button" color="red" on:click={() => (openModal = false)}>Cancel</Button>
+                    <Button type="button" color="red" on:click={() => (formModal = false)}>Cancel</Button>
                 </div>
             </form>
         </div>

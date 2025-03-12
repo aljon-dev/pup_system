@@ -5,21 +5,31 @@
 	import AddQuestionExam from "../Modals/addQuestionExam.svelte";
 
     let examModal= $state(false);
+    let Modalform = $state(false);
+    let idExam = $state();
 
     let {data} = $props();
 
 
 
-    function openModal(open:boolean){
+  const openModal = (open:boolean) => {
         examModal = open;
 
+    }
+
+    const openFormModal = (open:boolean,id:number) =>{
+        Modalform = open;
+        idExam = id;
     }
 
 
 
 </script>
 <CreateExams bind:openModal={examModal} />
-<AddQuestionExam  {data}/>
+<AddQuestionExam
+ bind:formModal={Modalform}
+ bind:examId={idExam}
+ />
 
     <div class="h-min-screen w-full p-8"> 
         <div class="flex flex-row justify-between">
@@ -38,7 +48,7 @@
                     <P> Type: {exam.student_type ?? 'For All'} </P>
                     <Hr/>
                     <div class="flex flex-row  gap-2">
-                        <Button color="blue"> Question </Button>
+                        <Button color="blue"  onclick={()=> openFormModal(true,exam.id)}> Question </Button>
                         <Button color="blue"> <EditSolid/> </Button>
                         <Button color="red"> <TrashBinSolid/> </Button>
                     </div>
