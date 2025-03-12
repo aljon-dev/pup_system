@@ -1,13 +1,19 @@
 <script lang="ts">
-	import { Button, Card, Hr, P } from "flowbite-svelte";
+	import { Button, Card, Hr, Input, P } from "flowbite-svelte";
 	import CreateExams from "../Modals/CreateExams.svelte";
 	import { EditSolid, TrashBinSolid } from "flowbite-svelte-icons";
 	import AddQuestionExam from "../Modals/addQuestionExam.svelte";
+	import type { SubmitFunction } from "@sveltejs/kit";
+	import { enhance } from "$app/forms";
+	import ExamView from "../Modals/ExamView.svelte";
 
     let examModal= $state(false);
     let Modalform = $state(false);
-    let idExam = $state();
+    let modalView = $state(false);
 
+
+    let idExam = $state();
+    let questions: any[] = $state([]);
     let {data} = $props();
 
 
@@ -17,10 +23,29 @@
 
     }
 
-    const openFormModal = (open:boolean,id:number) =>{
+
+
+
+ const openFormModal = (open:boolean,id:number) =>{
         Modalform = open;
         idExam = id;
     }
+
+  const submitStatus:SubmitFunction = ()  => {
+
+    return async ({result,update})  =>{
+        const {status,data} = result as {status:number,type:string, data:{status:number,msg:string, questions:any[]}}
+        
+        if(status === 200){
+            questions = data.questions;
+            modalView = true;
+        }
+     }
+
+    }
+
+  
+  
 
 
 
@@ -29,6 +54,11 @@
 <AddQuestionExam
  bind:formModal={Modalform}
  bind:examId={idExam}
+ />
+
+ <ExamView
+ bind:ViewModal={modalView}
+ bind:question = {questions}
  />
 
     <div class="h-min-screen w-full p-8"> 
@@ -49,9 +79,14 @@
                     <Hr/>
                     <div class="flex flex-row  gap-2">
                         <Button color="blue"  onclick={()=> openFormModal(true,exam.id)}> Question </Button>
-                        <Button color="blue"> <EditSolid/> </Button>
+                        <form  method="POST" action="?/showDataExam" use:enhance={submitStatus} >
+                            <Input type="hidden" name="exam_id" value={exam.id}/>
+                            <Button type ="submit"> <EditSolid/> </Button>
+                        </form>
+                      
                         <Button color="red"> <TrashBinSolid/> </Button>
                     </div>
+                </div>
             </Card>
            {/each} 
         </div>

@@ -4,7 +4,6 @@ import type { PageServerLoad, Actions } from "./$types";
 
 export const load: PageServerLoad = async ({ locals: { supabase } }) => {
 
-
     const { data: todos, error: error } = await supabase.from('todo').select("*")
 
     if (error) {
@@ -38,6 +37,9 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
      if(bankError){
         console.log(bankError.message);
      }
+
+
+     
 
     
 
@@ -173,7 +175,7 @@ export const actions: Actions = {
             }
         
     
-            const { data, error } = await supabase
+            const {  error } = await supabase
               .from('question_bank')
               .insert([
                 {
@@ -249,6 +251,20 @@ export const actions: Actions = {
                 success: true,
             };
           },
+
+
+         showDataExam : async({locals:{supabase},request}) =>{
+                
+          const formData = await request.formData();
+          const examId = formData.get('exam_id');
+          
+          const {data:questions , error:loadError } = await supabase.from('questions').select('*').eq('exam_id',examId);
+               
+            return{
+              questions,
+            }
+
+         },
         
 
     SignOut: async ({ locals: { supabase } }) => {
