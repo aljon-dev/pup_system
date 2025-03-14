@@ -37,6 +37,7 @@
 	import StudentList from './DashboarComponents/StudentList.svelte';
 	import Exams from './DashboarComponents/Exams.svelte';
 	import TestBank from './DashboarComponents/TestBank.svelte';
+	import Calendar from './DashboarComponents/Calendar.svelte';
 
 	let isOpen = $state(true);
 	let isMobile = $state(false);
@@ -286,6 +287,12 @@
 			<TestBank {data} />
 		</main>
 	{/if}
+
+	{#if Navigator == NavigatorList[5]}
+	<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
+		<Calendar {data}/>
+	</main>
+{/if}
 
 
 

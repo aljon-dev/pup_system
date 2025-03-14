@@ -39,9 +39,17 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
      }
 
 
+     const formattedData = ExamList?.map((exam)=>{
+            return {
+                id: exam.id,
+                title: exam.name,
+                description: exam.description,
+                start: exam.scheduled_at ,
+                end: exam.scheduled_at ? new Date(new Date(exam.scheduled_at).getTime() + exam.duration * 60000) : null
+            }
+     }) ?? [];
      
 
-    
 
     return {
         todos,
@@ -49,6 +57,7 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
         studentsRegister,
         ExamList,
         questionBank,
+        formattedData
     }
 
 

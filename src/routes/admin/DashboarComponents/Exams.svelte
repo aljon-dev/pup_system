@@ -44,10 +44,6 @@
 
     }
 
-  
-  
-
-
 
 </script>
 <CreateExams bind:openModal={examModal} />
