@@ -41,6 +41,7 @@
 
                 
                 <div class="flex flex-col p-2">
+                    <Label>Category</Label>
                   <Select bind:value={studentTypeChoose} name="exam_type"> 
                     {#each chooseType as type}
                         <option value={type} selected={studentTypeChoose === type}>{type}</option>

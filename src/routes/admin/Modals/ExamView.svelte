@@ -74,7 +74,10 @@
                  <Hr/>
                   <div class="flex flex-row gap-2">
                     <Button  color="yellow" type ="submit"> <EditSolid/> </Button>
-                    <Button color="red"> <TrashBinSolid/> </Button>
+                    <form >
+                    <Button color="red" type ="submit" > <TrashBinSolid/> </Button>
+
+                    </form>
                   </div>
 
                 </div>
