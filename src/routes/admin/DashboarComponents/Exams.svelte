@@ -6,6 +6,7 @@
 	import type { SubmitFunction } from "@sveltejs/kit";
 	import { enhance } from "$app/forms";
 	import ExamView from "../Modals/ExamView.svelte";
+	import { onMount } from "svelte";
 
     let examModal= $state(false);
     let Modalform = $state(false);
@@ -41,8 +42,8 @@
             modalView = true;
         }
      }
-
     }
+
 
 
 </script>

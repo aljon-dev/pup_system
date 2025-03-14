@@ -275,6 +275,65 @@ export const actions: Actions = {
 
          },
         
+        DeleteQuestions : async({locals:{supabase},request}) =>{
+            
+            const formData  = await request.formData();
+            const questionId = formData.get('questionId');
+            
+            const {error:deleteError} = await supabase.from('questions').delete().eq('id',questionId)
+
+
+            if(deleteError){
+                return{
+                    status:500,
+                    data:{
+                        status:500,
+                        msg:deleteError.message
+                    }
+                }
+            }else{
+                return{
+                    status:200,
+                    data:{
+                        status:200,
+                        msg:'Successfully Deleted'
+                    }
+                }
+            }
+
+        },
+
+
+        DeleteQuestionsBank : async({locals:{supabase},request}) =>{
+            
+            const formData  = await request.formData();
+            const questionId = formData.get('questionId');
+            
+            const {error:deleteError} = await supabase.from('questions').delete().eq('id',questionId)
+
+
+            if(deleteError){
+                return{
+                    status:500,
+                    data:{
+                        status:500,
+                        msg:deleteError.message
+                    }
+                }
+            }else{
+                return{
+                    status:200,
+                    data:{
+                        status:200,
+                        msg:'Successfully Deleted'
+                    }
+                }
+            }
+
+        },
+
+
+
 
     SignOut: async ({ locals: { supabase } }) => {
 
