@@ -265,9 +265,9 @@
 	{/if}
 
 	{#if Navigator == NavigatorList[1]}
-	<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
-		<Exams {data} />
-	</main>
+		<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
+			<Exams {data} />
+		</main>
 	{/if}
 
 	{#if Navigator == NavigatorList[2]}
@@ -276,12 +276,8 @@
 		</main>
 	{/if}
 
+	{#if Navigator == NavigatorList[3]}{/if}
 
-	{#if Navigator == NavigatorList[3]}
-		
-	{/if}
-
-	
 	{#if Navigator == NavigatorList[4]}
 		<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
 			<TestBank {data} />
@@ -289,16 +285,10 @@
 	{/if}
 
 	{#if Navigator == NavigatorList[5]}
-	<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
-		<Calendar {data}/>
-	</main>
-{/if}
-
-
-
-
-	
-
+		<main class="flex-2 mt-16 w-full bg-gray-50 p-4 md:ml-0 md:mt-0 dark:bg-gray-900">
+			<Calendar {data} />
+		</main>
+	{/if}
 
 	<!-- MODALS HERE -->
 
